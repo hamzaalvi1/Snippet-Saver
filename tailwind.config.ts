@@ -1,5 +1,4 @@
 import type { Config } from "tailwindcss";
-
 const config: Config = {
   content: [
     "./src/pages/**/*.{js,ts,jsx,tsx,mdx}",
@@ -8,6 +7,23 @@ const config: Config = {
   ],
   theme: {
     extend: {
+      colors: {
+        "regal-blue": "#243c5a",
+        "primary-color": "#8338ec",
+        "secondary-color": "#fff",
+        "hover-color": "#6d28d9",
+      },
+      fontSize: {
+        sm: "14px",
+        md: "18px",
+        lg: "24px",
+      },
+      fontFamily: {
+        poppins: "var(--font-poppins)",
+      },
+      screens: {
+        sm: { max: "648px" },
+      },
       backgroundImage: {
         "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
         "gradient-conic":
