@@ -2,8 +2,8 @@ import Image from "next/image";
 import { Button } from "../Button";
 const Cta = () => {
   return (
-    <section className="flex h-[calc(100vh-64px)] justify-center items-center container mx-auto flex-col gap-3">
-      <h2 className="font-bold text-3xl text-center">
+    <section className="flex h-[calc(100vh-64px)] justify-center items-center container mx-auto flex-col gap-3 sm:px-3 sm:h-[calc(100vh-160px)]">
+      <h2 className="font-bold text-3xl text-center sm:text-2xl">
         Organize Your Code Snippets{" "}
         <span className="text-primary-color">Efficiently!</span>
       </h2>
@@ -19,7 +19,7 @@ const Cta = () => {
         height={400}
         alt="app-ss"
       />
-      <Button title="let's get started" />
+      <Button classes="mt-3" title="let's get started" />
     </section>
   );
 };
