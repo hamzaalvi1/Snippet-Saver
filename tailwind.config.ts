@@ -8,7 +8,7 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        "regal-blue": "#243c5a",
+        "gray-color": "text-slate-500",
         "primary-color": "#8338ec",
         "secondary-color": "#fff",
         "hover-color": "#6d28d9",
