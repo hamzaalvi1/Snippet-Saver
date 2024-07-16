@@ -18,6 +18,7 @@ const Cta = () => {
         width={800}
         height={400}
         alt="app-ss"
+        priority={false}
       />
       <Button classes="mt-3" title="let's get started" />
     </section>
