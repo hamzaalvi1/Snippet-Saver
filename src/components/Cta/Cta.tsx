@@ -1,6 +1,10 @@
+"use client";
 import Image from "next/image";
+
 import { Button } from "../Button";
+import { useAuth } from "@clerk/nextjs";
 const Cta = () => {
+  const { isSignedIn } = useAuth();
   return (
     <section className="flex h-[calc(100vh-64px)] justify-center items-center container mx-auto flex-col gap-3 sm:px-3 sm:h-[calc(100vh-160px)]">
       <h2 className="font-bold text-3xl text-center sm:text-2xl">
@@ -20,7 +24,12 @@ const Cta = () => {
         alt="app-ss"
         priority={false}
       />
-      <Button classes="mt-3" title="let's get started" />
+      <Button
+        classes="mt-3"
+        title="let's get started"
+        asLink={true}
+        href={isSignedIn ? "/dashboard" : "/sign-in"}
+      />
     </section>
   );
 };
