@@ -61,10 +61,11 @@ export async function POST(req: Request) {
       emailAddress: email_addresses[0].email_address,
     };
     try {
+      console.log(newUser);
       await mongodbConnect();
       await User.create(newUser);
     } catch (err) {
-        console.error(err);
+      console.error(err);
     }
   }
 
