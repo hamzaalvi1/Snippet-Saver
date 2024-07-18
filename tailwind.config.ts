@@ -7,6 +7,9 @@ const config: Config = {
   ],
   theme: {
     extend: {
+      gridTemplateColumns: {
+        "dashboard-layout": "1fr 6fr",
+      },
       colors: {
         "primary-bg-color": "#f8fafc",
         "primary-color": "#8338ec",
