@@ -56,15 +56,21 @@ export async function POST(req: Request) {
   const eventType = evt.type;
   if (eventType === "user.created") {
     const { id, email_addresses } = evt.data;
+    const isAlreadyExist = await User.findOne({
+      emailAddress: email_addresses[0],
+    });
     const newUser = {
       clerkUserId: id,
       emailAddress: email_addresses[0].email_address,
     };
-    try {
-      await mongodbConnect();
-      await User.create(newUser);
-    } catch (err) {
-      console.error(err);
+    console.log(isAlreadyExist, "isAlreadyExist");
+    if (!isAlreadyExist) {
+      try {
+        await mongodbConnect();
+        await User.create(newUser);
+      } catch (err) {
+        console.error(err);
+      }
     }
   }
 
