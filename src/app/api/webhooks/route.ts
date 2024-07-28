@@ -38,11 +38,11 @@ export async function POST(req: Request) {
 
   // Verify the payload with the headers
   try {
-    evt = (await wh.verify(body, {
+    evt = wh.verify(body, {
       "svix-id": svix_id,
       "svix-timestamp": svix_timestamp,
       "svix-signature": svix_signature,
-    })) as WebhookEvent;
+    }) as WebhookEvent;
   } catch (err) {
     console.error("Error verifying webhook:", err);
     return new Response("Error occured", {
@@ -56,21 +56,15 @@ export async function POST(req: Request) {
   const eventType = evt.type;
   if (eventType === "user.created") {
     const { id, email_addresses } = evt.data;
-    const isAlreadyExist = await User.findOne({
-      emailAddress: email_addresses[0],
-    });
     const newUser = {
       clerkUserId: id,
       emailAddress: email_addresses[0].email_address,
     };
-    console.log(isAlreadyExist, "isAlreadyExist");
-    if (!isAlreadyExist) {
-      try {
-        await mongodbConnect();
-        await User.create(newUser);
-      } catch (err) {
+    try {
+      await mongodbConnect();
+      await User.create(newUser);
+    } catch (err) {
         console.error(err);
-      }
     }
   }
 
