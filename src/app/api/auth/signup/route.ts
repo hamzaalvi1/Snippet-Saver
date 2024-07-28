@@ -8,13 +8,19 @@ import { isUserAlreadyExist, createUser, mongodbConnect } from "@/libs";
 
 export const POST = async (request: NextRequest) => {
   const data = await request.json();
+
+  // parsing signup user through signup schema
   const result = await signUpSchema.safeParseAsync(data);
   if (!result.success) {
     return NextResponse.json({ error: zodError(result.error), status: 400 });
   }
   const { username, email, password } = result.data;
+
+  // generate hash password
   const salt = await bcrypt.genSalt(10);
   const hashPasword = await bcrypt.hash(password, salt);
+
+  //connect db & check if user is exist throw error otherwise create user
   await mongodbConnect();
   const isUserExist = await isUserAlreadyExist(email);
   if (isUserExist) {
