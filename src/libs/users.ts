@@ -14,3 +14,15 @@ export const isUserAlreadyExist = async (emailAddress: string) => {
   const isExist = await User.findOne({ email: emailAddress });
   return !!isExist;
 };
+
+export const findUser = async (emailAddress: string, select?: string[]) => {
+  let user;
+  const selectedKeys = select ? select.join(" ") : "";
+  if (selectedKeys.length > 0) {
+    user = await User.findOne({ email: emailAddress }).select(selectedKeys);
+  } else {
+    user = await User.findOne({ email: emailAddress });
+  }
+
+  return user;
+};

@@ -1,5 +1,5 @@
 import z from "zod";
-import { signUpSchema } from "@/validations";
+import { loginSchema, signUpSchema } from "@/validations";
 
 export type User = {
   email: string;
@@ -10,8 +10,9 @@ export type User = {
 
 export type JwtPayload = {
   emailAddress: string;
-  username: string;
   id: string;
 };
 
 export type SignUp = z.infer<typeof signUpSchema>;
+
+export type LoginIn = z.infer<typeof loginSchema>;
