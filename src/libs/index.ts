@@ -1,6 +1,6 @@
 import mongodbConnect from "./connect";
 
-import { generateToken } from "./jwt";
+import { generateToken, verifyToken } from "./jwt";
 import { createUser, isUserAlreadyExist, findUser } from "./users";
 
 export {
@@ -9,4 +9,5 @@ export {
   generateToken,
   isUserAlreadyExist,
   findUser,
+  verifyToken,
 };

@@ -10,7 +10,7 @@ export type User = {
 
 export type JwtPayload = {
   emailAddress: string;
-  id: string;
+  username: string;
 };
 
 export type SignUp = z.infer<typeof signUpSchema>;

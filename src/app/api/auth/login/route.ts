@@ -18,7 +18,11 @@ export const POST = async (request: NextRequest) => {
     );
   }
   await mongodbConnect();
-  const user = await findUser(result.data.email, ["email", "password"]);
+  const user = await findUser(result.data.email, [
+    "email",
+    "password",
+    "username",
+  ]);
   if (!user?.email) {
     return NextResponse.json(
       { message: "Invalid email address" },
@@ -34,7 +38,7 @@ export const POST = async (request: NextRequest) => {
   }
   const token = await generateToken({
     emailAddress: user?.email,
-    id: user?._id,
+    username: user?.username,
   });
 
   return NextResponse.json(

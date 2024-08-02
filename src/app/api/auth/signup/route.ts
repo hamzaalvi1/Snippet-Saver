@@ -4,7 +4,12 @@ import bcrypt from "bcrypt";
 
 import { signUpSchema } from "@/validations";
 import { zodError } from "@/utils/error.utils";
-import { isUserAlreadyExist, createUser, mongodbConnect } from "@/libs";
+import {
+  isUserAlreadyExist,
+  createUser,
+  mongodbConnect,
+  generateToken,
+} from "@/libs";
 
 export const POST = async (request: NextRequest) => {
   const data = await request.json();
@@ -22,14 +27,19 @@ export const POST = async (request: NextRequest) => {
 
   //connect db & check if user is exist throw error otherwise create user
   await mongodbConnect();
-  const isUserExist = await isUserAlreadyExist(email);
+  const isUserExist = await isUserAlreadyExist(email)
+;
   if (isUserExist) {
     return NextResponse.json({ error: "user already exists", status: 400 });
   }
 
   await createUser({ email, password: hashPasword, username });
-  return NextResponse.json({
-    message: "user sucessfully created",
-    status: 200,
-  });
+  const accessToken = await generateToken({ emailAddress: email, username });
+  return NextResponse.json(
+    {
+      message: "user sucessfully created",
+      data: accessToken,
+    },
+    { status: 200 }
+  );
 };
