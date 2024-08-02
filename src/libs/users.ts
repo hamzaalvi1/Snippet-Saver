@@ -2,6 +2,11 @@ import { User as UserType } from "@/types";
 
 import { User } from "@/models";
 
+type FindUserType = {
+  email: string;
+  select?: string[];
+  exclude?: string;
+};
 export const createUser = async (user: UserType) => {
   try {
     await User.create({ ...user });
@@ -15,17 +20,14 @@ export const isUserAlreadyExist = async (emailAddress: string) => {
   return !!isExist;
 };
 
-export const findUser = async (
-  emailAddress: string,
-  select?: string[],
-  exclude?: string
-) => {
+export const findUser = async (findObj: FindUserType) => {
+  const { email, select, exclude } = findObj;
   let user;
   const selectedKeys = select ? select.join(" ") : "";
   if (selectedKeys.length > 0) {
-    user = await User.findOne({ email: emailAddress }).select(selectedKeys);
+    user = await User.findOne({ email }).select(selectedKeys);
   } else {
-    user = await User.findOne({ email: emailAddress }, exclude);
+    user = await User.findOne({ email }, exclude);
   }
 
   return user;

@@ -10,6 +10,9 @@ export const GET = async (request: NextRequest) => {
   }
   mongodbConnect();
   const data = await verifyToken(token);
-  const user = await findUser(data?.emailAddress, [], "-password");
+  const user = await findUser({
+    email: data?.emailAddress,
+    exclude: "-password",
+  });
   return NextResponse.json({ message: "success", data: user }, { status: 200 });
 };

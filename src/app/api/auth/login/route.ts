@@ -18,11 +18,10 @@ export const POST = async (request: NextRequest) => {
     );
   }
   await mongodbConnect();
-  const user = await findUser(result.data.email, [
-    "email",
-    "password",
-    "username",
-  ]);
+  const user = await findUser({
+    email: result.data.email,
+    select: ["email", "password", "username"],
+  });
   if (!user?.email) {
     return NextResponse.json(
       { message: "Invalid email address" },
