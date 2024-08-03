@@ -1,11 +1,8 @@
-import { Cta } from "@/components/Cta";
-import { Header } from "@/components/Header";
-
+import { Button } from "@mantine/core";
 const HomePage = () => {
   return (
-    <main className="bg-slate-50">
-      <Header />
-      <Cta />
+    <main>
+      <Button>HELLO WORLD</Button>
     </main>
   );
 };
