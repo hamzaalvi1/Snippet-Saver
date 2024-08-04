@@ -9,13 +9,6 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@emotion/react": "^11.13.0",
-    "@emotion/server": "^11.11.0",
-    "@mantine/core": "^7.11.2",
-    "@mantine/dates": "^7.11.2",
-    "@mantine/form": "^7.11.2",
-    "@mantine/hooks": "^7.11.2",
-    "@mantine/next": "^6.0.22",
     "bcrypt": "^5.1.1",
     "dayjs": "^1.11.12",
     "jsonwebtoken": "^9.0.2",

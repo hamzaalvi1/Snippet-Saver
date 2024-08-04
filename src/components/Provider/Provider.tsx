@@ -1,7 +1,3 @@
-// mantine ui core css
-import "@mantine/core/styles.css";
-
-import { MantineProvider } from "@mantine/core";
 
 interface IProviderProps {
   children: React.ReactNode;
@@ -9,7 +5,7 @@ interface IProviderProps {
 
 const Provider: React.FC<IProviderProps> = (props) => {
   const { children } = props;
-  return <MantineProvider>{children}</MantineProvider>;
+  return <>{children}</>;
 };
 
 export default Provider;

@@ -2,7 +2,6 @@ import { Poppins } from "@/theme";
 
 import type { Metadata } from "next";
 import { Provider } from "@/components";
-import { ColorSchemeScript } from "@mantine/core";
 
 import "./globals.css";
 
@@ -21,9 +20,6 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <head>
-        <ColorSchemeScript />
-      </head>
       <body className={Poppins.className}>
         <Provider>{children}</Provider>
       </body>
