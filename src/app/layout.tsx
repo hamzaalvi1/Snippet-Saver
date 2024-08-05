@@ -1,4 +1,4 @@
-import { Poppins } from "@/theme";
+import { poppins } from "@/theme";
 
 import type { Metadata } from "next";
 import { Provider } from "@/components";
@@ -20,7 +20,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={Poppins.className}>
+      <body className={poppins.className}>
         <Provider>{children}</Provider>
       </body>
     </html>
