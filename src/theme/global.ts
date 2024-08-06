@@ -6,5 +6,6 @@ export const global = {
   },
   html: {
     scrollBehavior: "smooth",
+    textTransform: "lowercase",
   },
 };
