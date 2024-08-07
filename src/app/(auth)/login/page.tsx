@@ -1,6 +1,12 @@
-import { StyledAuthCard } from "../features/authCard.style";
+import { AuthCard } from "@/features/auth";
+
 const LoginPage = () => {
-  return <StyledAuthCard />;
+  return (
+    <AuthCard
+      imgUrl="/assets/images/signup-image.jpg"
+      element={<>HELLO WORLD</>}
+    />
+  );
 };
 
 export default LoginPage;

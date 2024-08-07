@@ -1,5 +1,4 @@
-
-import { StyledAuthContainer } from "./features/authLayout.style";
+import { StyledAuthContainer } from "@/features/auth";
 interface IAuthLayoutProps {
   children: React.ReactNode;
 }
