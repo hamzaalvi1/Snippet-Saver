@@ -19,7 +19,7 @@ const StyledButton = styled(Button, {
     prop !== "paddingBlock" && prop !== "paddingInline",
 })<IStyledButtonProps>`
   &.MuiButton-root {
-    border-radius: 5px;
+    border-radius: 6px;
     text-transform: unset;
     color: ${(props) => props.theme.palette.text.primary};
     font-size: ${({ fontSize = 16 }) => setFontSize(fontSize)};

@@ -1,10 +1,11 @@
-import { poppins } from "./fonts";
+import { colors } from "./colors";
+import { nunito } from "./fonts";
 import { pxToEM } from "./functions";
 
 import { TypographyOptions } from "@mui/material/styles/createTypography";
 
 const baseFontProperties = {
-  fontFamily: `${poppins.style.fontFamily} , sans-serif`,
+  fontFamily: `${nunito.style.fontFamily} , sans-serif`,
   fontWeightLight: 300,
   fontWeightRegular: 400,
   fontWeightMedium: 500,
@@ -32,45 +33,55 @@ const typography: TypographyOptions = {
   h1: {
     fontSize: baseFontProperties.fontSize3xl,
     fontWeight: baseFontProperties.fontWeightBold,
+    color: colors.text.primary,
   },
   h2: {
     fontSize: baseFontProperties.fontSize2XL,
     fontWeight: baseFontProperties.fontWeightBold,
+    color: colors.text.primary,
   },
   h3: {
     fontSize: baseFontProperties.fontSizeXXS,
     fontWeight: baseFontProperties.fontWeightRegular,
+    color: colors.text.primary,
   },
   h4: {
     fontSize: baseFontProperties.fontSizeXS,
     fontWeight: baseFontProperties.fontWeightRegular,
+    color: colors.text.primary,
   },
   h5: {
     fontSize: baseFontProperties.fontSizeSM,
     fontWeight: baseFontProperties.fontWeightRegular,
+    color: colors.text.primary,
   },
   h6: {
     fontSize: baseFontProperties.fontSizeBase,
     fontWeight: baseFontProperties.fontWeightRegular,
+    color: colors.text.primary,
   },
   body1: {
     fontSize: baseFontProperties.fontSizeBase,
     fontWeight: baseFontProperties.fontWeightRegular,
+    color: colors.text.primary,
   },
   caption: {
     fontFamily: baseFontProperties.fontFamily,
     fontSize: baseFontProperties.fontSizeSM,
     fontWeight: baseFontProperties.fontWeightRegular,
+    color: colors.text.primary,
   },
   subtitle1: {
     fontFamily: baseFontProperties.fontFamily,
     fontSize: baseFontProperties.fontSizeMD,
     fontWeight: baseFontProperties.fontWeightRegular,
+    color: colors.text.primary,
   },
   subtitle2: {
     fontFamily: baseFontProperties.fontFamily,
     fontSize: baseFontProperties.fontSizeSM,
     fontWeight: baseFontProperties.fontWeightBold,
+    color: colors.text.primary,
   },
 };
 

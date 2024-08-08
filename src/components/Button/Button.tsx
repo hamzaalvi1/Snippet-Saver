@@ -18,6 +18,7 @@ const Button: React.FC<IButtonProps> = (props) => {
   const {
     type,
     title,
+    block,
     disabled,
     isLoading,
     disableElevation,
@@ -35,6 +36,7 @@ const Button: React.FC<IButtonProps> = (props) => {
       disabled={isLoading || disabled}
       disableElevation={disableElevation}
       disableFocusRipple={disableFocusRipple}
+      fullWidth={block}
       onClick={handleClick}
       {...rest}
     >

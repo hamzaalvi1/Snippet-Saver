@@ -1,28 +1,40 @@
 import { PaletteOptions } from "@mui/material";
 
 export type CustomPaletteOptions = PaletteOptions & {
-  // success: string;
-  // error: string;
+  border: {
+    light: string;
+    main: string;
+    dark: string;
+  };
   text: { primary: string; secondary: string };
 };
 
 export const colors: CustomPaletteOptions = {
   primary: {
-    main: "#1a237e",
+    main: "#7F265B",
     light: "#304ffe",
   },
   secondary: {
     light: "#e6ee9c",
-    main: "#cddc39",
+    main: "#FFE6C9",
   },
-  // success: "#00e676",
-  // error: "#d50000",
+  success: {
+    main: "#00e676",
+  },
+  error: {
+    main: "#d50000",
+  },
   text: {
-    primary: "#424242",
-    secondary: "#212121",
+    primary: "#555555",
+    secondary: "#828282",
   },
   common: {
     white: "#fff",
     black: "#000",
+  },
+  border: {
+    light: "#e0e0e0",
+    main: "#DED2D9",
+    dark: "#b2b2b2",
   },
 };

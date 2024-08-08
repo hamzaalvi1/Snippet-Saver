@@ -1,5 +1,4 @@
-import AuthCard from "./AuthCard";
+import AuthWrapper from "./AuthWrapper";
+import { StyledAuthBox } from "./auth.styles";
 
-import { StyledAuthContainer } from "./auth.styles";
-
-export { StyledAuthContainer, AuthCard };
+export { AuthWrapper, StyledAuthBox };

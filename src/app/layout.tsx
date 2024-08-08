@@ -1,4 +1,4 @@
-import { poppins } from "@/theme";
+import { nunito } from "@/theme";
 
 import type { Metadata } from "next";
 import { Provider } from "@/components";
@@ -20,7 +20,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={poppins.className}>
+      <body className={nunito.className}>
         <Provider>{children}</Provider>
       </body>
     </html>

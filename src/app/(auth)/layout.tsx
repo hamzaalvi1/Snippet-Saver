@@ -1,11 +1,11 @@
-import { StyledAuthContainer } from "@/features/auth";
+import { AuthWrapper } from "@/features/auth";
 interface IAuthLayoutProps {
   children: React.ReactNode;
 }
 
 const AuthLayout: React.FC<IAuthLayoutProps> = (props) => {
   const { children } = props;
-  return <StyledAuthContainer>{children}</StyledAuthContainer>;
+  return <AuthWrapper>{children}</AuthWrapper>;
 };
 
 export default AuthLayout;
