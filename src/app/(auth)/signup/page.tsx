@@ -4,16 +4,11 @@ import { pxToEM } from "@/theme";
 
 import { Box, useMediaQuery } from "@mui/material";
 import { InputField, Button } from "@/components";
+import { AuthText, AuthHeader, StyledAuthBox } from "@/features/auth";
 import { MdOutlineVisibility, MdOutlineVisibilityOff } from "react-icons/md";
-import {
-  AuthText,
-  AuthHeader,
-  StyledAuthBox,
-  StyledForgotPassword,
-} from "@/features/auth";
 
-import { useLoginContainer } from "./useLoginContainer";
-const LoginPage = () => {
+import { useLoginContainer } from "../login/useLoginContainer";
+const SignUpPage = () => {
   const { control, passwordToggle, handlePasswordToggle, handleNavigate } =
     useLoginContainer();
   const matchesLg = useMediaQuery("(max-width:1199px)");
@@ -34,16 +29,25 @@ const LoginPage = () => {
         width={"100%"}
       >
         <AuthHeader
-          heading="Login into your account"
-          text={"See what is in code snippets"}
+          heading="Create an account"
+          text={"To save your code snippets"}
         />
         <Box width={matchesLg ? "100%" : "80%"}>
           <form>
             <InputField
+              id="username"
+              name="username"
+              label="Username"
+              control={control}
+              placeholder="John Doe"
+              sxFormControl={{ marginBottom: pxToEM(15) }}
+            />
+            <InputField
               id="email"
               name="email"
-              label="Email Address"
+              showIcon={true}
               control={control}
+              label="Email Address"
               placeholder="mail@abc.com"
               sxFormControl={{ marginBottom: pxToEM(15) }}
             />
@@ -59,17 +63,17 @@ const LoginPage = () => {
               type={passwordToggle ? "text" : "password"}
               sxFormControl={{ marginBottom: pxToEM(5) }}
             />
-            <StyledForgotPassword
-              onClick={() => handleNavigate("/forgot-password")}
-            >
-              Forgot Password?
-            </StyledForgotPassword>
-            <Button title="Login" block={true} sx={{ marginTop: pxToEM(15) }} />
+
+            <Button
+              title="Signup"
+              block={true}
+              sx={{ marginTop: pxToEM(15) }}
+            />
           </form>
           <AuthText
-            text="Not Register Yet?"
-            highlightedText="Create an account"
-            handleClick={() => handleNavigate("/signup")}
+            text="Alreadt Register"
+            highlightedText="Login your account"
+            handleClick={() => handleNavigate("/login")}
           />
         </Box>
       </Box>
@@ -77,4 +81,4 @@ const LoginPage = () => {
   );
 };
 
-export default LoginPage;
+export default SignUpPage;

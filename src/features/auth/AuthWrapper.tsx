@@ -7,13 +7,21 @@ interface IAuthWrapperProps {
 
 const AuthWrapper: React.FC<IAuthWrapperProps> = (props) => {
   const { children } = props;
+
   return (
     <StyledAuthContainer>
       <Grid container>
-        <Grid item xs={7} md={7}>
+        <Grid
+          item
+          sm={0}
+          md={6}
+          lg={6}
+          xl={7}
+          sx={{ "@media(max-width:766px)": { display: "none" } }}
+        >
           <StyledBgImagePane />
         </Grid>
-        <Grid item xs={5} md={5}>
+        <Grid item sm={12} md={6} lg={6} xl={5}>
           {children}
         </Grid>
       </Grid>

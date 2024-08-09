@@ -1,5 +1,5 @@
 "use client";
-import { CircularProgress } from "@mui/material";
+import { CircularProgress, SxProps } from "@mui/material";
 import { IStyledButtonProps, StyledButton } from "./Button.style";
 
 interface IButtonProps extends IStyledButtonProps {
@@ -12,6 +12,7 @@ interface IButtonProps extends IStyledButtonProps {
   block?: boolean;
   handleClick?: () => void;
   type?: "button" | "submit";
+  sx?: SxProps;
 }
 
 const Button: React.FC<IButtonProps> = (props) => {
@@ -30,6 +31,7 @@ const Button: React.FC<IButtonProps> = (props) => {
   } = props;
   return (
     <StyledButton
+
       type={type}
       color={color}
       variant={variant}

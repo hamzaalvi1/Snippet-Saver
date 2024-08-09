@@ -1,5 +1,5 @@
 "use client";
-import { FormControl, InputAdornment } from "@mui/material";
+import { FormControl, InputAdornment, SxProps } from "@mui/material";
 import { StyledLabel, StyledInputField } from "./InputField.style";
 
 import { Control, Controller } from "react-hook-form";
@@ -10,12 +10,13 @@ interface IInputFieldProps {
   name: string;
   type?: string;
   label?: string;
-  control: Control<Record<string, any>>;
+  control: Control<any>;
   disabled?: boolean;
   helperText?: string;
   placeholder?: string;
   defaultValue?: string | number;
   showIcon?: boolean;
+  sxFormControl?: SxProps;
   leftIcon?: React.ReactElement;
   rightIcon?: React.ReactElement;
   onIconClick?: (evt: any) => void;
@@ -36,6 +37,7 @@ const InputField: React.FC<IInputFieldProps> = (props) => {
     leftIcon,
     rightIcon,
     onIconClick,
+    sxFormControl,
   } = props;
   return (
     <Controller
@@ -46,7 +48,7 @@ const InputField: React.FC<IInputFieldProps> = (props) => {
         field: { ref: fieldRef, value, ...fieldProps },
         formState: { errors },
       }) => (
-        <FormControl fullWidth sx={{ marginBottom: pxToEM(15) }}>
+        <FormControl fullWidth sx={sxFormControl}>
           {label && <StyledLabel htmlFor={id}>{label}</StyledLabel>}
           <StyledInputField
             id={id}

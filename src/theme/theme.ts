@@ -6,6 +6,7 @@ import { breakpoints } from "./breakpoints";
 import { pxToEM, spacing } from "./functions";
 import { colors, CustomPaletteOptions } from "./colors";
 
+
 import { createStyled } from "@mui/system";
 import { createTheme, Theme } from "@mui/material/styles";
 
@@ -29,6 +30,14 @@ const theme: Theme & CustomTheme = createTheme({
     MuiCssBaseline: {
       styleOverrides: {
         ...global,
+      },
+    },
+    MuiTypography: {
+      defaultProps: {
+        variantMapping: {
+          body1: "p",
+          body2: "span",
+        },
       },
     },
   },

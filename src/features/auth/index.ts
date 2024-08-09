@@ -1,4 +1,12 @@
+import AuthText from "./AuthText";
+import AuthHeader from "./AuthHeader";
 import AuthWrapper from "./AuthWrapper";
-import { StyledAuthBox } from "./auth.styles";
+import { StyledAuthBox, StyledForgotPassword } from "./auth.styles";
 
-export { AuthWrapper, StyledAuthBox };
+export {
+  AuthWrapper,
+  AuthText,
+  AuthHeader,
+  StyledAuthBox,
+  StyledForgotPassword,
+};

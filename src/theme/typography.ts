@@ -83,6 +83,7 @@ const typography: TypographyOptions = {
     fontWeight: baseFontProperties.fontWeightBold,
     color: colors.text.primary,
   },
+  
 };
 
 export { typography, baseFontProperties };
