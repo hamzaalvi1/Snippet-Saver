@@ -1,21 +1,21 @@
 "use client";
-import { LoginIn } from "@/types";
+import { SignUp } from "@/types";
 
 import { useForm } from "react-hook-form";
 import { useRouter } from "next/navigation";
 import { useState, useCallback } from "react";
-import { useLoginQuery } from "@/queries/auth.queries";
+import { useSignUpQuery } from "@/queries/auth.queries";
 
-import { loginSchema } from "@/validations";
+import { signUpSchema } from "@/validations";
 import { successLogger } from "@/utils/toast.utils";
 import { zodResolver } from "@hookform/resolvers/zod";
 
-export const useLoginContainer = () => {
+export const useSignUpContainer = () => {
   const router = useRouter();
-  const { mutateAsync: onLoginMutation, isPending } = useLoginQuery();
   const [passwordToggle, setPasswordToggle] = useState<boolean>(false);
-  const { control, handleSubmit, reset } = useForm<LoginIn>({
-    resolver: zodResolver(loginSchema),
+  const { mutateAsync: onSignUpMutation, isPending } = useSignUpQuery();
+  const { control, handleSubmit, reset } = useForm<SignUp>({
+    resolver: zodResolver(signUpSchema),
   });
 
   const handleNavigate = (url: string) => router.push(url);
@@ -23,10 +23,10 @@ export const useLoginContainer = () => {
     setPasswordToggle((prev) => !prev);
   }, []);
 
-  const handleLogin = async (data: LoginIn) => {
-    const response = await onLoginMutation(data);
-    if (response?.data.message) {
-      successLogger(response?.data.message, { position: "top-center" });
+  const handleSignUp = async (data: SignUp) => {
+    const response = await onSignUpMutation(data);
+    if (response) {
+      successLogger(response.data.message, { position: "top-center" });
       handleNavigate("/dashboard");
     }
   };
@@ -35,7 +35,7 @@ export const useLoginContainer = () => {
     control,
     isPending,
     passwordToggle,
-    handleLogin,
+    handleSignUp,
     handleSubmit,
     handleNavigate,
     handlePasswordToggle,

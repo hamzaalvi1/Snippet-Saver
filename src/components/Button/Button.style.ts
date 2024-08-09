@@ -46,8 +46,8 @@ const StyledButton = styled(Button, {
   }
 
   &.Mui-disabled {
-    background-color: #8590ff;
-    border: 1px solid #8590ff;
+    background-color: #bf649a;
+    border: 1px solid #9f5982;
     cursor: not-allowed;
   }
 `;

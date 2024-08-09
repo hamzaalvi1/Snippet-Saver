@@ -7,10 +7,17 @@ import { InputField, Button } from "@/components";
 import { AuthText, AuthHeader, StyledAuthBox } from "@/features/auth";
 import { MdOutlineVisibility, MdOutlineVisibilityOff } from "react-icons/md";
 
-import { useLoginContainer } from "../login/useLoginContainer";
+import { useSignUpContainer } from "./useSignUpContainer";
 const SignUpPage = () => {
-  const { control, passwordToggle, handlePasswordToggle, handleNavigate } =
-    useLoginContainer();
+  const {
+    control,
+    isPending,
+    passwordToggle,
+    handleSignUp,
+    handleSubmit,
+    handleNavigate,
+    handlePasswordToggle,
+  } = useSignUpContainer();
   const matchesLg = useMediaQuery("(max-width:1199px)");
 
   const passwordIcon = () =>
@@ -33,7 +40,7 @@ const SignUpPage = () => {
           text={"To save your code snippets"}
         />
         <Box width={matchesLg ? "100%" : "80%"}>
-          <form>
+          <form onSubmit={handleSubmit(handleSignUp)}>
             <InputField
               id="username"
               name="username"
@@ -65,8 +72,10 @@ const SignUpPage = () => {
             />
 
             <Button
-              title="Signup"
               block={true}
+              type="submit"
+              title="Signup"
+              isLoading={isPending}
               sx={{ marginTop: pxToEM(15) }}
             />
           </form>

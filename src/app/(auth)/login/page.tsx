@@ -14,8 +14,15 @@ import {
 
 import { useLoginContainer } from "./useLoginContainer";
 const LoginPage = () => {
-  const { control, passwordToggle, handlePasswordToggle, handleNavigate } =
-    useLoginContainer();
+  const {
+    control,
+    isPending,
+    passwordToggle,
+    handleLogin,
+    handleSubmit,
+    handleNavigate,
+    handlePasswordToggle,
+  } = useLoginContainer();
   const matchesLg = useMediaQuery("(max-width:1199px)");
 
   const passwordIcon = () =>
@@ -38,7 +45,7 @@ const LoginPage = () => {
           text={"See what is in code snippets"}
         />
         <Box width={matchesLg ? "100%" : "80%"}>
-          <form>
+          <form onSubmit={handleSubmit(handleLogin)}>
             <InputField
               id="email"
               name="email"
@@ -64,7 +71,13 @@ const LoginPage = () => {
             >
               Forgot Password?
             </StyledForgotPassword>
-            <Button title="Login" block={true} sx={{ marginTop: pxToEM(15) }} />
+            <Button
+              title="Login"
+              block={true}
+              type="submit"
+              isLoading={isPending}
+              sx={{ marginTop: pxToEM(15) }}
+            />
           </form>
           <AuthText
             text="Not Register Yet?"

@@ -1,9 +1,14 @@
 "use client";
-import { FormControl, InputAdornment, SxProps } from "@mui/material";
+import { pxToEM } from "@/theme";
+import {
+  FormControl,
+  InputAdornment,
+  SxProps,
+  FormHelperText,
+} from "@mui/material";
 import { StyledLabel, StyledInputField } from "./InputField.style";
 
 import { Control, Controller } from "react-hook-form";
-import { pxToEM } from "@/theme";
 
 interface IInputFieldProps {
   id: string;
@@ -43,9 +48,9 @@ const InputField: React.FC<IInputFieldProps> = (props) => {
     <Controller
       name={name}
       control={control}
-      defaultValue={defaultValue}
+      defaultValue={defaultValue ?? ""}
       render={({
-        field: { ref: fieldRef, value, ...fieldProps },
+        field: { ref: fieldRef, ...fieldProps },
         formState: { errors },
       }) => (
         <FormControl fullWidth sx={sxFormControl}>
@@ -53,10 +58,8 @@ const InputField: React.FC<IInputFieldProps> = (props) => {
           <StyledInputField
             id={id}
             type={type}
-            value={value}
             inputRef={fieldRef}
             disabled={disabled}
-            helperText={helperText}
             placeholder={placeholder}
             error={!!errors[name]}
             {...fieldProps}
@@ -97,6 +100,20 @@ const InputField: React.FC<IInputFieldProps> = (props) => {
                 }),
             }}
           />
+          {typeof errors[name]?.message === "string" && (
+            <FormHelperText
+              error={!!errors[name]}
+              sx={{ marginLeft: pxToEM(10) }}
+            >
+              {errors[name]?.message}
+            </FormHelperText>
+          )}
+
+          {helperText && (
+            <FormHelperText sx={{ marginLeft: pxToEM(10) }}>
+              {helperText}
+            </FormHelperText>
+          )}
         </FormControl>
       )}
     />

@@ -52,4 +52,8 @@ export const StyledInputField = styled(TextField)`
       border-color: ${theme.palette.primary.main};
     }
   }
+  & input:-webkit-autofill {
+    transition: background-color 5000s ease-in-out 0s;
+    background-color: transparent !important;
+  }
 `;

@@ -1,4 +1,9 @@
 import { ZodError } from "zod";
+import { AxiosError } from "axios";
+
+export interface ErrorResponseData {
+  message?: string;
+}
 
 export const zodError = (error: ZodError) => {
   let errors: string[] = [];
@@ -15,4 +20,10 @@ export const zodError = (error: ZodError) => {
   }
 
   return errors[0];
+};
+
+export const axiosError = (error: unknown) => {
+  const { response } = error as AxiosError<ErrorResponseData>;
+  const message = response?.data?.message || "An unknown error occurred.";
+  return { response, message };
 };

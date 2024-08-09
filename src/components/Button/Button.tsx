@@ -43,7 +43,7 @@ const Button: React.FC<IButtonProps> = (props) => {
       {...rest}
     >
       {isLoading ? (
-        <CircularProgress size={20} sx={{ color: "#fff" }} />
+        <CircularProgress size={23} sx={{ color: "#fff" }} />
       ) : (
         title
       )}
