@@ -6,8 +6,10 @@ export type CustomPaletteOptions = PaletteOptions & {
     main: string;
     dark: string;
     contrast: string;
+    extraLight: string;
   };
   text: { primary: string; secondary: string };
+  whiteVariants: { light: string };
 };
 
 export const colors: CustomPaletteOptions = {
@@ -38,5 +40,9 @@ export const colors: CustomPaletteOptions = {
     main: "#DED2D9",
     dark: "#b2b2b2",
     contrast: "#C8CBD9",
+    extraLight: "#ebebee",
+  },
+  whiteVariants: {
+    light: "#F1F6FF",
   },
 };
