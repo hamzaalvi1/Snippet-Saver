@@ -4,7 +4,9 @@ import { AppBar, IconButton, Toolbar } from "@mui/material";
 export interface IStyledAppbarProps {
   drawerWidth: number;
 }
-export const StyledAppBar = styled(AppBar)<IStyledAppbarProps>`
+export const StyledAppBar = styled(AppBar, {
+  shouldForwardProp: (prop) => prop !== "drawerWidth",
+})<IStyledAppbarProps>`
   &.MuiAppBar-root {
     background-color: ${theme.palette.common.white};
     height: 100%;
@@ -16,7 +18,6 @@ export const StyledAppBar = styled(AppBar)<IStyledAppbarProps>`
     width: 100%;
     max-width: calc(100% - ${(props) => props.drawerWidth}px);
     transition: all 0.5s ease;
-  
   }
 `;
 

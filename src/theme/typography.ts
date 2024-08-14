@@ -11,6 +11,7 @@ const baseFontProperties = {
   fontWeightMedium: 500,
   fontWeightSemiBold: 600,
   fontWeightBold: 700,
+  fontWeightExtraBold: 800,
   fontSizeXXS: pxToEM(10),
   fontSizeXS: pxToEM(12),
   fontSizeSM: pxToEM(14),

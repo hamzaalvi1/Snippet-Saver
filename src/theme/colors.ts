@@ -18,7 +18,7 @@ export const colors: CustomPaletteOptions = {
     light: "#304ffe",
   },
   secondary: {
-    light: "#e6ee9c",
+    light: "#fffaf4d4",
     main: "#FFE6C9",
   },
   success: {
