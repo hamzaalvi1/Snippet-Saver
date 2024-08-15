@@ -42,8 +42,8 @@ const typography: TypographyOptions = {
     color: colors.text.primary,
   },
   h3: {
-    fontSize: baseFontProperties.fontSizeXXS,
-    fontWeight: baseFontProperties.fontWeightRegular,
+    fontSize: baseFontProperties.fontSizeLG,
+    fontWeight: baseFontProperties.fontWeightBold,
     color: colors.text.primary,
   },
   h4: {
@@ -84,7 +84,6 @@ const typography: TypographyOptions = {
     fontWeight: baseFontProperties.fontWeightBold,
     color: colors.text.primary,
   },
-  
 };
 
 export { typography, baseFontProperties };
