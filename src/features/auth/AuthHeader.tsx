@@ -1,6 +1,7 @@
 import Image from "next/image";
 
 import { pxToEM, theme } from "@/theme";
+import { Logo } from "@/components";
 import { Box, Typography } from "@mui/material";
 
 interface IAuthHeaderProps {
@@ -14,16 +15,13 @@ const AuthHeader: React.FC<IAuthHeaderProps> = (props) => {
     <Box
       display={"flex"}
       flexDirection={"column"}
-      gap={pxToEM(10)}
+      gap={pxToEM(12)}
       width={"100%"}
+      justifyContent={'flex-start'}
     >
+      {" "}
+      <Logo />
       <Box>
-        <Image
-          alt="logo"
-          width={55}
-          height={55}
-          src={"/assets/images/logo.png"}
-        />
         <Typography variant="h2">{heading}</Typography>
         <Typography
           variant="body1"

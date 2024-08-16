@@ -4,7 +4,6 @@ import { Box } from "@mui/material";
 export const StyledLogoWrapper = styled(Box)(({ theme }) => ({
   "&.logo-wrapper": {
     display: "flex",
-    justifyContent: "center",
     alignItems: "center",
     cursor: "pointer",
     gap: pxToEM(8),
