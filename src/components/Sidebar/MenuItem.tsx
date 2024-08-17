@@ -1,10 +1,7 @@
 "use client";
 import { usePathname } from "next/navigation";
 import {
-  Box,
-  List,
   ListItem,
-  ListItemButton,
   Tooltip,
   tooltipClasses,
   TooltipProps,
@@ -13,6 +10,7 @@ import {
 
 import { StyledListItemButton } from "./Sidebar.style";
 
+import { useSidebar } from "@/store";
 interface IMenuItemProps {
   title: string;
   url?: string;
@@ -20,18 +18,22 @@ interface IMenuItemProps {
 }
 
 const MenuItem: React.FC<IMenuItemProps> = (props) => {
+  const { open } = useSidebar();
   const pathName = usePathname();
   const { title, url, icon: Icon } = props;
   return (
     <ListItem disablePadding={true}>
       <StyledListItemButton
+        open={open}
         disableRipple={false}
+        sx={{
+          justifyContent: open ? "flex-start" : "center",
+        }}
         selected={pathName == url ? true : false}
       >
-        <Typography variant="body1">
-          <Icon size={22} />
-          {title}
-        </Typography>
+        <Icon size={22} />
+
+        <Typography variant="body1">{title}</Typography>
       </StyledListItemButton>
     </ListItem>
   );

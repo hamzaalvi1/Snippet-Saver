@@ -1,11 +1,18 @@
 "use client";
 
+import { pxToEM } from "@/theme";
+
+import { sideBarConfig } from "./SidebarConfig";
+
 import Logo from "../Logo/Logo";
 import MenuItem from "./MenuItem";
-import { sideBarConfig } from "./SidebarConfig";
-import { StyledDrawer } from "./Sidebar.style";
-import { Box, List, Toolbar, Typography } from "@mui/material";
-import { IStyledDrawerProps, StyledMenuTitle } from "./Sidebar.style";
+import { List, Toolbar } from "@mui/material";
+import {
+  StyledDrawer,
+  StyledDrawerWrapper,
+  IStyledDrawerProps,
+} from "./Sidebar.style";
+
 interface ISidebarProps extends IStyledDrawerProps {
   variant?: "permanent" | "persistent" | "temporary";
 }
@@ -15,19 +22,25 @@ const Sidebar: React.FC<ISidebarProps> = (props) => {
 
   return (
     <StyledDrawer elevation={2} open={open} variant={variant} anchor="left">
-      <Box paddingBlock={10}>
-        <Toolbar>
-          <Logo />
-          
+      <StyledDrawerWrapper open={open}>
+        <Toolbar
+          sx={{
+            justifyContent: open ? "flex-start" : "center",
+            "@media(max-width:767px)": { justifyContent: "center" },
+          }}
+        >
+          <Logo
+            wrapperSx={{ margin: `${pxToEM(10)} 0 ${pxToEM(20)}` }}
+            showOnlyLogo={open ? false : true}
+          />
         </Toolbar>
-        {/* <StyledMenuTitle>Quick Links</StyledMenuTitle> */}
+
         <List disablePadding={true}>
           {sideBarConfig.map((item, idx) => {
             return <MenuItem {...item} key={idx} />;
           })}
         </List>
-      </Box>
-      {/* <StyledMenuTitle>Languages</StyledMenuTitle> */}
+      </StyledDrawerWrapper>
     </StyledDrawer>
   );
 };

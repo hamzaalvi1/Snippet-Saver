@@ -1,32 +1,42 @@
 "use client";
 import { theme } from "@/theme";
-import { Box, Typography } from "@mui/material";
+import { Box, SxProps, Typography } from "@mui/material";
 import { StyledLogoWrapper } from "./Logo.style";
 import { PiBracketsCurlyBold } from "react-icons/pi";
 
-const Logo = () => {
+interface ILogoProps {
+  wrapperSx?: SxProps;
+  showOnlyLogo?: boolean;
+}
+const Logo: React.FC<ILogoProps> = (props) => {
+  const { wrapperSx, showOnlyLogo = false } = props;
   return (
-    <StyledLogoWrapper className="logo-wrapper">
+    <StyledLogoWrapper className="logo-wrapper" sx={wrapperSx}>
       <Box className="logo-img">
         <PiBracketsCurlyBold />
       </Box>
-      <Typography
-        display={"inline-flex"}
-        alignItems={"baseline"}
-        gap={6}
-        variant="h3"
-        fontWeight={800}
-        color={theme.palette.primary.main}
-      >
-        Snippet{" "}
+      {!showOnlyLogo && (
         <Typography
-          fontSize={"inherit"}
-          color={theme.palette.border.dark}
-          fontWeight={700}
+          display={"inline-flex"}
+          alignItems={"baseline"}
+          gap={6}
+          variant="h3"
+          fontWeight={800}
+          color={theme.palette.primary.main}
+          sx={{
+            "@media(max-width:767px)": { fontSize: 0 },
+          }}
         >
-          Saver
+          Snippet{" "}
+          <Typography
+            fontSize={"inherit"}
+            color={theme.palette.border.dark}
+            fontWeight={700}
+          >
+            Saver
+          </Typography>
         </Typography>
-      </Typography>
+      )}
     </StyledLogoWrapper>
   );
 };

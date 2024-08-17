@@ -1,5 +1,6 @@
 import { pxToEM, styled, theme } from "@/theme";
 import { AppBar, IconButton, Toolbar } from "@mui/material";
+import { DrawerWidth } from "@/constants";
 
 export interface IStyledAppbarProps {
   drawerWidth: number;
@@ -18,6 +19,10 @@ export const StyledAppBar = styled(AppBar, {
     width: 100%;
     max-width: calc(100% - ${(props) => props.drawerWidth}px);
     transition: all 0.5s ease;
+
+    @media (max-width: ${theme.breakpoints.values.md}px) {
+       max-width: calc(100% - ${DrawerWidth.MIN}px);
+    }
   }
 `;
 
