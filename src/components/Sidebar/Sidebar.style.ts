@@ -1,6 +1,10 @@
-import { Box, Drawer, ListItemButton, Typography } from "@mui/material";
+import {
+  Box,
+  Drawer,
+  ListItemButton,
+} from "@mui/material";
 import { DrawerWidth } from "@/constants";
-import { pxToEM, styled, theme, baseFontProperties } from "@/theme";
+import { pxToEM, styled, theme } from "@/theme";
 import { setPadding } from "@/utils/theme.utils";
 
 export interface IStyledDrawerProps {
@@ -85,3 +89,5 @@ export const StyledListItemButton = styled(ListItemButton)<{ open: boolean }>`
     }
   }
 `;
+
+
