@@ -24,7 +24,7 @@ const Logo: React.FC<ILogoProps> = (props) => {
           fontWeight={800}
           color={theme.palette.primary.main}
           sx={{
-            "@media(max-width:767px)": { fontSize: 0 },
+            "@media(max-width:767px)": { display: "none" },
           }}
         >
           Snippet{" "}
