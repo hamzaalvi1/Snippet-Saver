@@ -1,5 +1,5 @@
 "use client";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import ToolTip from "./ToolTip";
 import { Fade, ListItem, Typography } from "@mui/material";
 
@@ -14,6 +14,7 @@ interface IMenuItemProps {
 
 const MenuItem: React.FC<IMenuItemProps> = (props) => {
   const { open } = useSidebar();
+  const router = useRouter();
   const pathName = usePathname();
   const { title, url, icon: Icon } = props;
   return (
@@ -22,6 +23,7 @@ const MenuItem: React.FC<IMenuItemProps> = (props) => {
         <StyledListItemButton
           open={open}
           disableRipple={false}
+          onClick={() => router.push(url || "/default-path")}
           sx={{
             justifyContent: open ? "flex-start" : "center",
           }}

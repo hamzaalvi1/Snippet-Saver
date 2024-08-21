@@ -2,7 +2,7 @@ import { ApiMethods } from "@/constants";
 import { axiosError } from "./error.utils";
 import { errorLogger } from "./toast.utils";
 import { BaseURL } from "@/helper/api/baseUrl";
-import axios, { AxiosRequestConfig } from "axios";
+import axios, { AxiosRequestConfig, AxiosResponse } from "axios";
 // import store from "../store"; // Adjust the import based on your project structure
 
 type RecordIndex = {
@@ -45,7 +45,7 @@ export class FetchAPI {
   //   return this;
   // }
 
-  async send<T>(): Promise<{ data: T }> {
+  async send<T>(): Promise<AxiosResponse> {
     const config: AxiosRequestConfig = {
       method: this.method,
       url: this.url,
@@ -55,8 +55,8 @@ export class FetchAPI {
     };
 
     try {
-      const { data, status } = await axios(config);
-      return { data };
+      const data = await axios(config);
+      return data;
     } catch (error: unknown) {
       const { response, message } = axiosError(error);
       errorLogger(message);

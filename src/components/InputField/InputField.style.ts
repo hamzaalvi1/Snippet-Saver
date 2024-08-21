@@ -22,13 +22,14 @@ export const StyledLabel = styled(FormLabel)<StyledLabel>`
   }
 `;
 
-export const StyledInputField = styled(TextField)`
+export const StyledInputField = styled(TextField, {
+  shouldForwardProp: (prop) => prop !== "isBorderNone",
+})<{ isBorderNone?: boolean }>`
   .MuiInputBase-root {
     border-radius: 6px;
     padding-inline: ${pxToEM(15)};
     width: 100%;
     height: ${pxToEM(55)};
-    background-color: ${theme.palette.common.white};
     color: ${theme.palette.text.primary};
     font-size: ${pxToEM(14)};
 
@@ -51,6 +52,7 @@ export const StyledInputField = styled(TextField)`
     &:hover {
       border-color: ${theme.palette.primary.main};
     }
+    ${({ isBorderNone }) => isBorderNone && `border:none`}
   }
   & input:-webkit-autofill {
     transition: background-color 5000s ease-in-out 0s;

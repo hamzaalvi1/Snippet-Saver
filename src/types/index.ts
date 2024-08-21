@@ -16,3 +16,10 @@ export type JwtPayload = {
 export type SignUp = z.infer<typeof signUpSchema>;
 
 export type LoginIn = z.infer<typeof loginSchema>;
+
+export type BaseModel = {
+  createdAt: string;
+  updatedAt: string;
+  deletedAt?: string | null;
+};
+  

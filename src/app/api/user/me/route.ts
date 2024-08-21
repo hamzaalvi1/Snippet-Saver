@@ -14,7 +14,7 @@ export const GET = async (request: NextRequest) => {
   const data = await verifyToken(token);
   const user = await findUser({
     email: data?.emailAddress,
-    exclude: "-password",
+    exclude: "-password -__v",
   });
-  return NextResponse.json({ message: "success", data: user }, { status: 200 });
+  return NextResponse.json({ user }, { status: 200 });
 };
