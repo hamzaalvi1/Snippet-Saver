@@ -45,7 +45,7 @@ export class FetchAPI {
   //   return this;
   // }
 
-  async send<T>(): Promise<AxiosResponse> {
+  async send<T>(): Promise<AxiosResponse<T>> {
     const config: AxiosRequestConfig = {
       method: this.method,
       url: this.url,

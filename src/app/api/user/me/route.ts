@@ -2,8 +2,6 @@ import { type NextRequest, NextResponse } from "next/server";
 import { verifyToken, findUser, mongodbConnect } from "@/libs";
 export const GET = async (request: NextRequest) => {
   const token = request?.cookies.get("accessToken")?.value!;
-
-  console.log(token, "token");
   if (!token) {
     return NextResponse.json(
       { error: "Unauthorized resource" },
@@ -16,5 +14,5 @@ export const GET = async (request: NextRequest) => {
     email: data?.emailAddress,
     exclude: "-password -__v",
   });
-  return NextResponse.json({ user }, { status: 200 });
+  return NextResponse.json({ ...user._doc }, { status: 200 });
 };

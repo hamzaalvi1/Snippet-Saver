@@ -5,7 +5,6 @@ interface DashboardLayoutProps {
 }
 const DashboardLayout: React.FC<DashboardLayoutProps> = (props) => {
   const { children } = props;
-
   return <DashboardWrapper>{children}</DashboardWrapper>;
 };
 

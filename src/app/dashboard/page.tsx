@@ -1,4 +1,3 @@
-"use client";
 const Dashboard = () => {
   return <div>Dashboard</div>;
 };

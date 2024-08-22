@@ -1,6 +1,5 @@
 "use client";
 
-import { useEffect } from "react";
 import { useSidebar } from "@/store";
 import { Appbar, Sidebar } from "@/components";
 import {
@@ -19,14 +18,9 @@ interface IDashboardProps {
 const DashboardWrapper: React.FC<IDashboardProps> = (props) => {
   const { children } = props;
   const { open } = useSidebar();
-  const { data: meData, isSuccess } = useMeQuery();
   const setUser = useUserStore((state) => state.setUser);
-
-  useEffect(() => {
-    if (isSuccess) {
-      setUser(meData.data.user);
-    }
-  }, [isSuccess]);
+  const _ = useMeQuery({ onSuccess: setUser });
+  
   return (
     <StyledDashboardContainer>
       <Sidebar open={open} variant={"permanent"} />
