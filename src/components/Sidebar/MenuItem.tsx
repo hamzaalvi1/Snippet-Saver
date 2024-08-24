@@ -5,7 +5,7 @@ import { Fade, ListItem, Typography } from "@mui/material";
 
 import { StyledListItemButton } from "./Sidebar.style";
 
-import { useSidebar } from "@/store";
+import { useSidebarStore } from "@/store";
 interface IMenuItemProps {
   title: string;
   url?: string;
@@ -13,7 +13,7 @@ interface IMenuItemProps {
 }
 
 const MenuItem: React.FC<IMenuItemProps> = (props) => {
-  const { open } = useSidebar();
+  const { open } = useSidebarStore();
   const router = useRouter();
   const pathName = usePathname();
   const { title, url, icon: Icon } = props;

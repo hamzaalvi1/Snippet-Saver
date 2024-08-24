@@ -2,7 +2,7 @@
 import { useState, useCallback } from "react";
 import { theme } from "@/theme";
 
-import { useSidebar } from "@/store";
+import { useSidebarStore } from "@/store";
 
 import { DrawerWidth } from "@/constants";
 
@@ -12,7 +12,7 @@ import { HiMenuAlt1 } from "react-icons/hi";
 import { StyledAppBar, StyledIconButton, StyledToolbar } from "./Appbar.style";
 
 const Appbar: React.FC<{}> = (props) => {
-  const { open, toggleOpen } = useSidebar();
+  const { open, toggleOpen } = useSidebarStore();
   const [searchQuery, setSearchQuery] = useState<string>("");
 
   const handleSearch = useCallback(
