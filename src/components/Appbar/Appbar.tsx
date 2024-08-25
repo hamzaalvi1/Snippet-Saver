@@ -1,17 +1,15 @@
 "use client";
 import { useState, useCallback } from "react";
-import { theme } from "@/theme";
 
 import { useSidebarStore } from "@/store";
 
 import { DrawerWidth } from "@/constants";
 
-import { Avatar } from "@mui/material";
-import { Searchbox } from "@/components";
 import { HiMenuAlt1 } from "react-icons/hi";
+import { Searchbox, ClientRender, Avatar, Skeleton } from "@/components";
 import { StyledAppBar, StyledIconButton, StyledToolbar } from "./Appbar.style";
 
-const Appbar: React.FC<{}> = (props) => {
+const Appbar: React.FC<{}> = () => {
   const { open, toggleOpen } = useSidebarStore();
   const [searchQuery, setSearchQuery] = useState<string>("");
 
@@ -37,11 +35,9 @@ const Appbar: React.FC<{}> = (props) => {
           <HiMenuAlt1 size={24} strokeWidth={0.5} />
         </StyledIconButton>
         <Searchbox value={searchQuery} handleChange={handleSearch} />
-        <Avatar
-          sx={{ bgcolor: theme.palette.primary.main }}
-          alt="Hamza Alvi"
-          src="/broken-image.jpg"
-        />
+        <ClientRender loadingComponent={<Skeleton.AvatarSkeleton />}>
+          <Avatar />
+        </ClientRender>
       </StyledToolbar>
     </StyledAppBar>
   );

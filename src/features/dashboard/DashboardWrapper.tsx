@@ -17,8 +17,8 @@ interface IDashboardProps {
 const DashboardWrapper: React.FC<IDashboardProps> = (props) => {
   const { children } = props;
   const { open } = useSidebarStore((state) => state);
-  const { setUser } = useUserStore((state) => state);
-  const _ = useMeQuery({ onSuccess: setUser });
+  const { setUser, getUser } = useUserStore((state) => state);
+  const _ = useMeQuery({ enabled: !getUser(), onSuccess: setUser });
 
   return (
     <StyledDashboardContainer>

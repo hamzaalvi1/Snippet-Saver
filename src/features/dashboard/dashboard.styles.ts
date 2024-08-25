@@ -13,7 +13,7 @@ export const StyledDashboardContainer = styled(Box)`
 export const StyledDashboardContentWrapper = styled(Box)<{ width: number }>`
   width: 100%;
   max-width: calc(100% - ${(props) => props.width}px);
-  padding: ${setPadding(25)};
+  padding: ${setPadding(20)};
   margin-left: auto;
   height: 100%;
   max-height: calc(100% - 70px);

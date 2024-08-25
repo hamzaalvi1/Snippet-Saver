@@ -7,4 +7,11 @@ export const StyledSearchBoxWrapper = styled(Box)`
   flex: 0.5;
   display: flex;
   align-items: center;
+
+  @media (max-width: ${theme.breakpoints.values.md}px) {
+    flex: 0.8;
+    .MuiButtonBase-root {
+      display: none;
+    }
+  }
 `;

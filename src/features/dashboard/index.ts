@@ -1,3 +1,3 @@
 import DashboardWrapper from "./DashboardWrapper";
-
-export { DashboardWrapper };
+import Tags from "./Tags";
+export { DashboardWrapper, Tags };

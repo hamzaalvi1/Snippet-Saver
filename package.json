@@ -5,7 +5,7 @@
   "scripts": {
     "dev": "next dev --turbo -p 8000",
     "build": "next build",
-    "start": "next start p 8000",
+    "start": "next start -p 8000",
     "lint": "next lint"
   },
   "dependencies": {
@@ -31,6 +31,7 @@
     "react-hot-toast": "^2.4.1",
     "react-icons": "^5.2.1",
     "sharp": "^0.33.4",
+    "usehooks-ts": "^3.1.0",
     "zod": "^3.23.8",
     "zustand": "^4.5.4"
   },
