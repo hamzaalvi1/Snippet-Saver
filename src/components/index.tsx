@@ -6,6 +6,7 @@ import Sidebar from "./Sidebar/Sidebar";
 import Provider from "./Provider/Provider";
 import Searchbox from "./Searchbox/Searchbox";
 import InputField from "./InputField/InputField";
+import CodeSnippet from "./CodeSnippet/CodeSnippet";
 import ClientRender from "./ClientRender/ClientRender";
 import * as Skeleton from "./Skeleton";
 export {
@@ -18,5 +19,6 @@ export {
   Skeleton,
   Searchbox,
   InputField,
+  CodeSnippet,
   ClientRender,
 };

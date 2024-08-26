@@ -1,11 +1,13 @@
 "use client";
-import { usePathname, useRouter } from "next/navigation";
 import ToolTip from "./ToolTip";
 import { Fade, ListItem, Typography } from "@mui/material";
-
 import { StyledListItemButton } from "./Sidebar.style";
 
-import { useSidebarStore } from "@/store";
+import { useSidebarStore, useUserStore } from "@/store";
+import { usePathname, useRouter } from "next/navigation";
+
+import { handleDeleteCookie } from "@/utils/cookies.utils";
+
 interface IMenuItemProps {
   title: string;
   url?: string;
@@ -13,9 +15,15 @@ interface IMenuItemProps {
 }
 
 const MenuItem: React.FC<IMenuItemProps> = (props) => {
-  const { open } = useSidebarStore();
   const router = useRouter();
   const pathName = usePathname();
+  const { open } = useSidebarStore();
+  const { clearUser } = useUserStore((state) => state);
+  const handleLogout = () => {
+    handleDeleteCookie();
+    router.push("/login");
+    clearUser();
+  };
   const { title, url, icon: Icon } = props;
   return (
     <ToolTip title={title} arrow TransitionComponent={Fade} placement="right">
@@ -23,14 +31,13 @@ const MenuItem: React.FC<IMenuItemProps> = (props) => {
         <StyledListItemButton
           open={open}
           disableRipple={false}
-          onClick={() => router.push(url || "/default-path")}
+          onClick={() => (url ? router.push(url) : handleLogout())}
           sx={{
             justifyContent: open ? "flex-start" : "center",
           }}
-          selected={pathName == url ? true : false}
+          {...(url && { selected: pathName == url ? true : false })}
         >
           <Icon size={22} />
-
           <Typography variant="body1">{title}</Typography>
         </StyledListItemButton>
       </ListItem>

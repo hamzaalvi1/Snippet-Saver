@@ -34,7 +34,7 @@ export const sideBarConfig: SidebarConfig = [
   },
   {
     title: "Log Out",
-    url: "/dashboard/favorites",
+    url: "",
     icon: HiOutlineLogout,
   },
 ];

@@ -19,7 +19,6 @@ const DashboardWrapper: React.FC<IDashboardProps> = (props) => {
   const { open } = useSidebarStore((state) => state);
   const { setUser, getUser } = useUserStore((state) => state);
   const _ = useMeQuery({ enabled: !getUser(), onSuccess: setUser });
-
   return (
     <StyledDashboardContainer>
       <Sidebar />

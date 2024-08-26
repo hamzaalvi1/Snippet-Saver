@@ -7,6 +7,7 @@ interface UserStoreState {
   user: string | null;
   setUser: (userData: UserResponseType) => void;
   getUser: () => UserResponseType | null;
+  clearUser: () => void;
 }
 
 const useUserStore = create<UserStoreState>()(
@@ -22,6 +23,9 @@ const useUserStore = create<UserStoreState>()(
           return decryptData(encryptedUser);
         }
         return null;
+      },
+      clearUser: () => {
+        set({ user: null });
       },
     }),
     {
