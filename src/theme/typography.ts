@@ -74,7 +74,7 @@ const typography: TypographyOptions = {
   },
   subtitle1: {
     fontFamily: baseFontProperties.fontFamily,
-    fontSize: baseFontProperties.fontSizeMD,
+    fontSize: baseFontProperties.fontSizeSM,
     fontWeight: baseFontProperties.fontWeightRegular,
     color: colors.text.primary,
   },

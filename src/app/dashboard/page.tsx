@@ -7,7 +7,7 @@ const Dashboard = () => {
     <div>
       <Tags />
 
-      <Grid container spacing={10}>
+      <Grid container spacing={10} mt={10}>
         <Grid item xl={4}>
           <CodeSnippet />
         </Grid>
