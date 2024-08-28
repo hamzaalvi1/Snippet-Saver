@@ -1,13 +1,19 @@
 "use client";
-import { pxToEM } from "@/theme";
+import { pxToEM, theme } from "@/theme";
+
+import { Chip } from "@/components";
+import { FaTrash } from "react-icons/fa6";
+import { FaJs, FaClipboard } from "react-icons/fa";
 import { MdFavoriteBorder } from "react-icons/md";
-import SyntaxHighlighter from "react-syntax-highlighter";
+import { docco } from "react-syntax-highlighter/dist/esm/styles/hljs";
+import { StyledCodeSnippet, StyledCardtContent } from "./CodeSnippet.style";
 import {
-  docco,
-  lightfair,
-  dark,
-} from "react-syntax-highlighter/dist/esm/styles/hljs";
-import { Card, CardContent, IconButton, Chip, CardHeader } from "@mui/material";
+  Card,
+  IconButton,
+  CardHeader,
+  Typography,
+  CardActions,
+} from "@mui/material";
 const CodeSnippet: React.FC = () => {
   return (
     <Card elevation={0} sx={{ padding: pxToEM(20) }}>
@@ -18,22 +24,44 @@ const CodeSnippet: React.FC = () => {
         subheaderTypographyProps={{ variant: "subtitle1" }}
         titleTypographyProps={{ variant: "h3", mb: 2, component: "h3" }}
         action={
-          <IconButton>
-            <MdFavoriteBorder fontSize={22} />
-          </IconButton>
+          <>
+            <IconButton>
+              <FaClipboard fontSize={18} color={theme.palette.text.secondary} />
+            </IconButton>
+            <IconButton>
+              <MdFavoriteBorder
+                fontSize={22}
+                color={theme.palette.text.secondary}
+              />
+            </IconButton>
+          </>
         }
       />
-      <CardContent
-        sx={{ padding: 0, paddingBlock: 10, display: "flex", gap: 5 }}
-      >
-        <Chip title="function" label="function" color="primary" />
-        <Chip title="function" label="function" color="primary" />
-        <Chip title="function" label="function" color="primary" />
-        <Chip title="function" label="function" color="primary" />
-      </CardContent>
-      <SyntaxHighlighter language="javascript" style={docco} showLineNumbers>
-        `hello world`
-      </SyntaxHighlighter>
+      <StyledCardtContent>
+        <Chip label="hello world" size="medium" />
+        <Chip label="hello world" size="medium" />
+        <Chip label="hello world" size="medium" />
+        <Chip label="hello world" size="medium" />
+      </StyledCardtContent>
+      <StyledCardtContent>
+        <Typography variant="subtitle1">
+          Lorem ipsum dolor sit amet consectetur, adipisicing elit. Eaque ab
+          repellendus adipisci incidunt ea in voluptatum suscipit odit earum
+          magnam, quo ipsam voluptate totam est autem dolorem inventore omnis
+          officia!
+        </Typography>
+      </StyledCardtContent>
+      <StyledCardtContent>
+        <StyledCodeSnippet language="javascript" style={docco} showLineNumbers>
+          `hello world`
+        </StyledCodeSnippet>
+      </StyledCardtContent>
+      <CardActions sx={{ padding: 0, justifyContent: "space-between" }}>
+        <FaJs fontSize={20} color={theme.palette.text.secondary} />
+        <IconButton>
+          <FaTrash fontSize={16} color={theme.palette.text.secondary} />
+        </IconButton>
+      </CardActions>
     </Card>
   );
 };

@@ -1,3 +1,4 @@
+import Chip from "./Chip/Chip";
 import Logo from "./Logo/Logo";
 import Appbar from "./Appbar/Appbar";
 import Avatar from "./Avatar/Avatar";
@@ -10,6 +11,7 @@ import CodeSnippet from "./CodeSnippet/CodeSnippet";
 import ClientRender from "./ClientRender/ClientRender";
 import * as Skeleton from "./Skeleton";
 export {
+  Chip,
   Logo,
   Avatar,
   Button,

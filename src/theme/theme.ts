@@ -4,9 +4,8 @@ import { global } from "./global";
 import { typography } from "./typography";
 import { breakpoints } from "./breakpoints";
 import { pxToEM, spacing } from "./functions";
+import { themedComponent } from "./components";
 import { colors, CustomPaletteOptions } from "./colors";
-
-
 import { createStyled } from "@mui/system";
 import { createTheme, Theme } from "@mui/material/styles";
 
@@ -40,6 +39,7 @@ const theme: Theme & CustomTheme = createTheme({
         },
       },
     },
+    ...themedComponent
   },
 });
 
