@@ -1,5 +1,5 @@
 import { styled, pxToEM, theme } from "@/theme";
-import { CardContent } from "@mui/material";
+import { CardContent, Box } from "@mui/material";
 import SyntaxHighlighter from "react-syntax-highlighter";
 
 export const StyledCardtContent = styled(CardContent)`
@@ -7,7 +7,7 @@ export const StyledCardtContent = styled(CardContent)`
   display: flex;
   gap: 10px;
   flex-wrap: wrap;
-  
+
   padding-block: ${pxToEM(10)};
   &:last-child {
     padding-bottom: 0;
@@ -21,4 +21,10 @@ export const StyledCodeSnippet = styled(SyntaxHighlighter)<{
   background-color: ${theme.palette.whiteVariants.light} !important;
   width: 100%;
   font-size: ${pxToEM(18)};
+`;
+
+export const StyledAddCodeSnippetWrapper = styled(Box)`
+  padding: ${pxToEM(20)};
+  display: flex;
+  flex-direction: column;
 `;

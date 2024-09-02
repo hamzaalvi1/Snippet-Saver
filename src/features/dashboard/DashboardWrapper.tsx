@@ -1,6 +1,6 @@
 "use client";
 
-import { Appbar, Sidebar } from "@/components";
+import { Appbar, Sidebar, AddSnippet } from "@/components";
 import {
   StyledDashboardContainer,
   StyledDashboardContentWrapper,
@@ -28,6 +28,7 @@ const DashboardWrapper: React.FC<IDashboardProps> = (props) => {
       >
         {children}
       </StyledDashboardContentWrapper>
+      <AddSnippet />
     </StyledDashboardContainer>
   );
 };

@@ -1,14 +1,11 @@
-import {
-  Box,
-  Drawer,
-  ListItemButton,
-} from "@mui/material";
+import { Box, Drawer, ListItemButton } from "@mui/material";
 import { DrawerWidth } from "@/constants";
 import { pxToEM, styled, theme } from "@/theme";
 import { setPadding } from "@/utils/theme.utils";
 
 export interface IStyledDrawerProps {
   open: boolean;
+  drawerWidth?: number;
 }
 
 export const StyledDrawerWrapper = styled(Box)<{ open: boolean }>`
@@ -27,6 +24,8 @@ export const StyledDrawer = styled(Drawer, {
     .MuiDrawer-paper {
       border-right: 2px solid ${theme.palette.whiteVariants.light};
       width: 100%;
+      
+      
       max-width: ${(props) =>
         props.open ? pxToEM(DrawerWidth.DEFAULT) : pxToEM(DrawerWidth.MIN)};
       box-sizing: border-box;
@@ -35,6 +34,7 @@ export const StyledDrawer = styled(Drawer, {
       background: ${theme.palette.common.white};
       transition: all 0.5s ease;
 
+      ${({ drawerWidth }) => drawerWidth && { maxWidth: pxToEM(drawerWidth) }}
         @media(max-width:${theme.breakpoints.values.md}px) {
         width: "100%";
         max-width: ${pxToEM(DrawerWidth.MIN)};
@@ -89,5 +89,3 @@ export const StyledListItemButton = styled(ListItemButton)<{ open: boolean }>`
     }
   }
 `;
-
-

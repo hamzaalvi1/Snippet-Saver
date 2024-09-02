@@ -80,6 +80,7 @@ const InputField: React.FC<IInputFieldProps> = (props) => {
                   sx={{
                     cursor:
                       typeof onIconClick == "function" ? "pointer" : "default",
+                    ...sxIconProps,
                   }}
                 >
                   {leftIcon}
