@@ -11,7 +11,6 @@ export type AutoCompleteOptionType = {
 
 interface IAutoCompleteProps {
   id?: string;
-  name: string;
   label?: string;
   disabled?: boolean;
   showIcon?: boolean;
@@ -21,14 +20,13 @@ interface IAutoCompleteProps {
   leftIcon?: React.ReactElement;
   rightIcon?: React.ReactElement;
   options: AutoCompleteOptionType[];
-  value: AutoCompleteOptionType | null | [] | AutoCompleteOptionType[];
-  onChange: (value: AutoCompleteOptionType | null) => void;
+  value: AutoCompleteOptionType | AutoCompleteOptionType[] | null;
+  onChange: (value: AutoCompleteOptionType | AutoCompleteOptionType[]) => void;
 }
 
 const AutoComplete: React.FC<IAutoCompleteProps> = (props) => {
   const {
     id,
-    name,
     label,
     value,
     options,
@@ -45,51 +43,62 @@ const AutoComplete: React.FC<IAutoCompleteProps> = (props) => {
   return (
     <FormControl fullWidth>
       {label && <StyledLabel htmlFor={id}>{label}</StyledLabel>}
+
       <StyledAutoComplete
         id={id}
         value={value}
+        options={options}
         multiple={multiple}
         disabled={disabled}
-        options={options || []}
         className="ss-autocomplete"
-        getOptionLabel={(option) => (option as AutoCompleteOptionType).title}
+        getOptionLabel={(option: any) => option.title}
+        isOptionEqualToValue={(option: any, value: any) =>
+          option.value === value.value
+        }
+        renderTags={(value: unknown[], getTagProps) =>
+          (value as AutoCompleteOptionType[]).map(
+            (option: AutoCompleteOptionType, index: number) => {
+              const { key, ...tagProps } = getTagProps({ index });
+              return (
+                <StyledChip label={option.title} key={key} {...tagProps} />
+              );
+            }
+          )
+        }
         renderInput={(params) => (
           <TextField
             {...params}
             placeholder={placeholder}
-            name={name}
             InputProps={{
               ...params.InputProps,
-              ...(showIcon &&
-                !!leftIcon && {
-                  startAdornment: (
+              startAdornment: (
+                <>
+                  {showIcon && (
                     <InputAdornment position="start" sx={sxIconProps}>
                       {leftIcon}
                     </InputAdornment>
-                  ),
-                }),
-              ...(showIcon &&
-                !!rightIcon && {
-                  endAdornment: (
-                    <InputAdornment position="end" sx={sxIconProps}>
+                  )}
+                  {params.InputProps.startAdornment}
+                </>
+              ),
+              endAdornment: (
+                <>
+                  {showIcon && (
+                    <InputAdornment position="start" sx={sxIconProps}>
                       {rightIcon}
                     </InputAdornment>
-                  ),
-                }),
+                  )}
+                  {params.InputProps.endAdornment}
+                </>
+              ),
             }}
           />
         )}
-        onChange={(_, value) =>
-          onChange(value as AutoCompleteOptionType | null)
+        onChange={(_, newValue) =>
+          onChange(
+            newValue as AutoCompleteOptionType | AutoCompleteOptionType[]
+          )
         }
-        renderTags={(value: unknown[], getTagProps) => {
-          // Assert the value type here
-          const optionsValue = value as AutoCompleteOptionType[];
-          return optionsValue.map((option, index) => {
-            const tagProps = getTagProps({ index });
-            return <StyledChip label={option.title} {...tagProps} />;
-          });
-        }}
       />
     </FormControl>
   );
