@@ -2,9 +2,16 @@
 import { StyledChip } from "../Chip/Chip.style";
 import { StyledAutoComplete } from "./AutoComplete.style";
 import { StyledLabel } from "../InputField/InputField.style";
-import { TextField, FormControl, InputAdornment, SxProps } from "@mui/material";
+import {
+  TextField,
+  FormControl,
+  InputAdornment,
+  SxProps,
+  createFilterOptions,
+} from "@mui/material";
 
 export type AutoCompleteOptionType = {
+  inputValue?: string;
   title: string;
   value: string | number;
 };
@@ -24,6 +31,7 @@ interface IAutoCompleteProps {
   onChange: (value: AutoCompleteOptionType | AutoCompleteOptionType[]) => void;
 }
 
+const filter = createFilterOptions<AutoCompleteOptionType>();
 const AutoComplete: React.FC<IAutoCompleteProps> = (props) => {
   const {
     id,
@@ -39,13 +47,13 @@ const AutoComplete: React.FC<IAutoCompleteProps> = (props) => {
     sxIconProps,
     onChange,
   } = props;
-
   return (
     <FormControl fullWidth>
       {label && <StyledLabel htmlFor={id}>{label}</StyledLabel>}
 
       <StyledAutoComplete
         id={id}
+        freeSolo
         value={value}
         options={options}
         multiple={multiple}
@@ -94,11 +102,11 @@ const AutoComplete: React.FC<IAutoCompleteProps> = (props) => {
             }}
           />
         )}
-        onChange={(_, newValue) =>
+        onChange={(_, newValue) => {
           onChange(
             newValue as AutoCompleteOptionType | AutoCompleteOptionType[]
-          )
-        }
+          );
+        }}
       />
     </FormControl>
   );

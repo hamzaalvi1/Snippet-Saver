@@ -11,7 +11,7 @@ import { InputField, AutoComplete } from "@/components";
 
 import { pxToEM } from "@/theme";
 const AddSnippet = () => {
-  const [value, setValue] = useState<AutoCompleteOptionType[]>([]);
+  const [values, setValue] = useState<AutoCompleteOptionType[]>([]);
   return (
     <StyledDrawer
       open={true}
@@ -24,7 +24,7 @@ const AddSnippet = () => {
         <Typography variant="h3" color={"primary.main"}>
           Add Code Snippet
         </Typography>
-        <Box sx={{ marginBlock: pxToEM(10) }}>  
+        <Box sx={{ marginBlock: pxToEM(10) }}>
           <form>
             <InputField
               id="title"
@@ -43,7 +43,7 @@ const AddSnippet = () => {
               leftIcon={<PiTagChevronFill />}
               sxIconProps={{ fontSize: 18 }}
               placeholder="Add code tags"
-              value={value}
+              value={values}
               onChange={(value) => setValue(value as AutoCompleteOptionType[])}
               options={[
                 { title: "The Shawshank Redemption", value: 1994 },

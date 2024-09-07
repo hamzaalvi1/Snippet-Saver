@@ -7,7 +7,7 @@ export const StyledAutoComplete = styled(Autocomplete)(({ theme }) => ({
       borderRadius: "6px",
       paddingInline: pxToEM(15),
       width: "100%",
-      height: pxToEM(55),
+      minHeight: pxToEM(55),
       color: theme.palette.text.primary,
       fontSize: pxToEM(14),
     },
