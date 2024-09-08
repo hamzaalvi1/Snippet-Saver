@@ -1,4 +1,5 @@
 import useUserStore from "./useUserStore";
 import useSidebarStore from "./useSidebarStore";
+import useSnippertEditorStore from "./useSnippetEditor";
 
-export { useSidebarStore, useUserStore };
+export { useSidebarStore, useUserStore, useSnippertEditorStore };

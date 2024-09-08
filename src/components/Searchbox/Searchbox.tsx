@@ -1,6 +1,8 @@
 "use client";
 import { pxToEM, theme } from "@/theme";
 
+import { useSnippertEditorStore } from "@/store";
+
 import { FiSearch } from "react-icons/fi";
 import { MdOutlineAdd } from "react-icons/md";
 import { Button, InputField } from "@/components";
@@ -13,7 +15,8 @@ interface ISearchboxProps {
 
 const Searchbox: React.FC<ISearchboxProps> = (props) => {
   const { handleChange, value } = props;
-  return (  
+  const { handleOpenEditor } = useSnippertEditorStore();
+  return (
     <StyledSearchBoxWrapper>
       <InputField
         value={value}
@@ -31,8 +34,9 @@ const Searchbox: React.FC<ISearchboxProps> = (props) => {
         fontSize={14}
         title="Snippet"
         paddingInline={30}
-        startIcon={<MdOutlineAdd />}
         disableElevation={true}
+        startIcon={<MdOutlineAdd />}
+        handleClick={handleOpenEditor}
         sx={{ borderRadius: "40px !important" }}
       />
     </StyledSearchBoxWrapper>

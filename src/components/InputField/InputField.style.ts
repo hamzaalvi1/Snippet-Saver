@@ -29,7 +29,7 @@ export const StyledInputField = styled(TextField, {
     border-radius: 6px;
     padding-inline: ${pxToEM(15)};
     width: 100%;
-    height: ${pxToEM(55)};
+    min-height: ${pxToEM(55)};
     color: ${theme.palette.text.primary};
     font-size: ${pxToEM(14)};
 

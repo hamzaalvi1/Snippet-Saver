@@ -17,6 +17,7 @@ interface IDashboardProps {
 const DashboardWrapper: React.FC<IDashboardProps> = (props) => {
   const { children } = props;
   const { open } = useSidebarStore((state) => state);
+
   const { setUser, getUser } = useUserStore((state) => state);
   const _ = useMeQuery({ enabled: !getUser(), onSuccess: setUser });
   return (
@@ -27,8 +28,8 @@ const DashboardWrapper: React.FC<IDashboardProps> = (props) => {
         width={open ? DrawerWidth.DEFAULT : DrawerWidth.MIN}
       >
         {children}
+        <AddSnippet />
       </StyledDashboardContentWrapper>
-      <AddSnippet />
     </StyledDashboardContainer>
   );
 };

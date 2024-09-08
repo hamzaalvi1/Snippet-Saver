@@ -13,10 +13,12 @@ import { Control, Controller } from "react-hook-form";
 interface IInputFieldProps {
   id: string;
   name: string;
+  rows?: number;
   type?: string;
   label?: string;
-  showIcon?: boolean;
   disabled?: boolean;
+  showIcon?: boolean;
+  multiLine?: boolean;
   helperText?: string;
   placeholder?: string;
   control?: Control<any>;
@@ -35,6 +37,7 @@ const InputField: React.FC<IInputFieldProps> = (props) => {
   const {
     id,
     name,
+    rows,
     control,
     type = "text",
     label,
@@ -46,6 +49,7 @@ const InputField: React.FC<IInputFieldProps> = (props) => {
     showIcon,
     leftIcon,
     rightIcon,
+    multiLine,
     onChange,
     onIconClick,
     sxIconProps,
@@ -64,10 +68,12 @@ const InputField: React.FC<IInputFieldProps> = (props) => {
       <StyledInputField
         id={id}
         type={type}
+        rows={rows}
+        error={error}
         inputRef={fieldRef}
         disabled={disabled}
+        multiline={multiLine}
         placeholder={placeholder}
-        error={error}
         isBorderNone={isBorderNone}
         {...fieldProps}
         InputProps={{
