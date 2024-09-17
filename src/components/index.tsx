@@ -1,3 +1,5 @@
+import dynamic from "next/dynamic";
+
 import Chip from "./Chip/Chip";
 import Logo from "./Logo/Logo";
 import Appbar from "./Appbar/Appbar";
@@ -14,6 +16,10 @@ import ClientRender from "./ClientRender/ClientRender";
 import AutoComplete from "./AutoComplete/AutoComplete";
 import * as Skeleton from "./Skeleton";
 
+const CodeEditor = dynamic(() => import("./CodeEditor/CodeEditor"), {
+  ssr: false,
+});
+
 export {
   Chip,
   Logo,
@@ -25,6 +31,7 @@ export {
   Provider,
   Skeleton,
   Searchbox,
+  CodeEditor,
   InputField,
   AddSnippet,
   CodeSnippet,

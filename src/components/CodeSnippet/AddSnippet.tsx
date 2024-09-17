@@ -6,11 +6,11 @@ import { IoMdCloseCircle } from "react-icons/io";
 import { PiTagChevronFill } from "react-icons/pi";
 import { Typography, Box, Stack } from "@mui/material";
 import { StyledDrawer } from "../Sidebar/Sidebar.style";
-import { InputField, AutoComplete, Button } from "@/components";
 import { MdOutlineTitle, MdDescription } from "react-icons/md";
 import { StyledAddCodeSnippetWrapper } from "./CodeSnippet.style";
 
 import { AutoCompleteOptionType } from "../AutoComplete/AutoComplete";
+import { InputField, AutoComplete, Button, CodeEditor } from "@/components";
 
 import { pxToEM, theme } from "@/theme";
 
@@ -96,6 +96,7 @@ const AddSnippet = () => {
                 }}
                 placeholder="Add code descriptions"
               />
+              <CodeEditor />
               <Button title="Add Code Snippet" />
             </Stack>
           </form>
