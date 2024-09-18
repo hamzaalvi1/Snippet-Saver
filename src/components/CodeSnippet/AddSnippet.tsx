@@ -2,16 +2,19 @@
 import { useState } from "react";
 import { useSnippertEditorStore } from "@/store";
 
+import { HiOutlineCode } from "react-icons/hi";
 import { IoMdCloseCircle } from "react-icons/io";
 import { PiTagChevronFill } from "react-icons/pi";
 import { Typography, Box, Stack } from "@mui/material";
 import { StyledDrawer } from "../Sidebar/Sidebar.style";
-import { MdOutlineTitle, MdDescription } from "react-icons/md";
 import { StyledAddCodeSnippetWrapper } from "./CodeSnippet.style";
+
+import { MdOutlineTitle, MdDescription, MdLanguage } from "react-icons/md";
 
 import { AutoCompleteOptionType } from "../AutoComplete/AutoComplete";
 import { InputField, AutoComplete, Button, CodeEditor } from "@/components";
 
+import { ProgrammingLanguages, EditorThemes } from "@/constants";
 import { pxToEM, theme } from "@/theme";
 
 const AddSnippet = () => {
@@ -96,7 +99,36 @@ const AddSnippet = () => {
                 }}
                 placeholder="Add code descriptions"
               />
-              <CodeEditor />
+
+              <Stack gap={10} direction={"row"}>
+                <AutoComplete
+                  label="Theme"
+                  options={EditorThemes.map((theme) => ({
+                    title: theme,
+                    value: theme,
+                  }))}
+                  value={null}
+                  onChange={() => {}}
+                  placeholder="Select theme"
+                  showIcon={true}
+                  leftIcon={<MdLanguage />}
+                  sxIconProps={{ fontSize: 18 }}
+                />
+                <AutoComplete
+                  label="Language"
+                  options={ProgrammingLanguages.map((language) => ({
+                    title: language,
+                    value: language,
+                  }))}
+                  value={null}
+                  onChange={() => {}}
+                  showIcon={true}
+                  leftIcon={<HiOutlineCode />}
+                  sxIconProps={{ fontSize: 18 }}
+                  placeholder="Select language"
+                />
+              </Stack>
+              <CodeEditor value={"null"} onChange={() => {}} />
               <Button title="Add Code Snippet" />
             </Stack>
           </form>

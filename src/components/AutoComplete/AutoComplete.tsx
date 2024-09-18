@@ -23,6 +23,7 @@ interface IAutoCompleteProps {
   showIcon?: boolean;
   multiple?: boolean;
   placeholder?: string;
+  showPopupIcon?: boolean;
   sxIconProps?: SxProps;
   leftIcon?: React.ReactElement;
   rightIcon?: React.ReactElement;
@@ -45,6 +46,7 @@ const AutoComplete: React.FC<IAutoCompleteProps> = (props) => {
     rightIcon,
     placeholder,
     sxIconProps,
+    showPopupIcon = true,
     onChange,
   } = props;
   return (
@@ -58,6 +60,7 @@ const AutoComplete: React.FC<IAutoCompleteProps> = (props) => {
         options={options}
         multiple={multiple}
         disabled={disabled}
+        forcePopupIcon={showPopupIcon}
         className="ss-autocomplete"
         getOptionLabel={(option: any) => option.title}
         isOptionEqualToValue={(option: any, value: any) =>

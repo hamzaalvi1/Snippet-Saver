@@ -1,4 +1,5 @@
 export const ProgrammingLanguages: string[] = [
+  "jsx",
   "javascript",
   "java",
   "python",
