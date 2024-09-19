@@ -1,6 +1,4 @@
 "use client";
-import { useState } from "react";
-import { useSnippertEditorStore } from "@/store";
 
 import { HiOutlineCode } from "react-icons/hi";
 import { IoMdCloseCircle } from "react-icons/io";
@@ -17,22 +15,17 @@ import { InputField, AutoComplete, Button, CodeEditor } from "@/components";
 import { ProgrammingLanguages, EditorThemes } from "@/constants";
 import { pxToEM, theme } from "@/theme";
 
+import { useAddSnippetContainer } from "./useAddSnippetContainer";
+
 const AddSnippet = () => {
-  const { open: editorOpen, handleCloseEditor } = useSnippertEditorStore(
-    (state) => state
-  );
+  const {
+    tags,
+    editorOpen,
+    handleAddTags,
+    handleCloseEditor,
+    handleFormatedEditorOptions,
+  } = useAddSnippetContainer();
 
-  const [tags, setTags] = useState<AutoCompleteOptionType[]>([]);
-
-  const handleAddTags = (tagList: AutoCompleteOptionType[]) => {
-    const updatedTagsList = tagList.map((tag) => {
-      if (typeof tag === "string") {
-        return { title: tag, value: tag } as AutoCompleteOptionType;
-      }
-      return tag;
-    });
-    setTags(updatedTagsList);
-  };
   return (
     <StyledDrawer
       elevation={0}
@@ -103,10 +96,7 @@ const AddSnippet = () => {
               <Stack gap={10} direction={"row"}>
                 <AutoComplete
                   label="Theme"
-                  options={EditorThemes.map((theme) => ({
-                    title: theme,
-                    value: theme,
-                  }))}
+                  options={handleFormatedEditorOptions(EditorThemes)}
                   value={null}
                   onChange={() => {}}
                   placeholder="Select theme"
@@ -116,10 +106,7 @@ const AddSnippet = () => {
                 />
                 <AutoComplete
                   label="Language"
-                  options={ProgrammingLanguages.map((language) => ({
-                    title: language,
-                    value: language,
-                  }))}
+                  options={handleFormatedEditorOptions(ProgrammingLanguages)}
                   value={null}
                   onChange={() => {}}
                   showIcon={true}

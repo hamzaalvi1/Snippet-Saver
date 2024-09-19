@@ -1,5 +1,9 @@
 import z from "zod";
-import { loginSchema, signUpSchema } from "@/validations";
+import {
+  loginSchema,
+  signUpSchema,
+  addEditCodeSnippetSchema,
+} from "@/validations";
 
 export type User = {
   email: string;
@@ -22,4 +26,5 @@ export type BaseModel = {
   updatedAt: string;
   deletedAt?: string | null;
 };
-  
+
+export type AddEditCodeSnippet = z.infer<typeof addEditCodeSnippetSchema>;

@@ -1,4 +1,4 @@
 import { loginSchema } from "./login";
 import { signUpSchema } from "./signup";
-
-export { signUpSchema, loginSchema };
+import { addEditCodeSnippetSchema } from "./addEditCodeSnippet";
+export { signUpSchema, loginSchema, addEditCodeSnippetSchema };

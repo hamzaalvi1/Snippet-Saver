@@ -14,7 +14,7 @@ export const useSignUpContainer = () => {
   const router = useRouter();
   const [passwordToggle, setPasswordToggle] = useState<boolean>(false);
   const { mutateAsync: onSignUpMutation, isPending } = useSignUpQuery();
-  const { control, handleSubmit, reset } = useForm<SignUp>({
+  const { control, handleSubmit } = useForm<SignUp>({
     resolver: zodResolver(signUpSchema),
   });
 
