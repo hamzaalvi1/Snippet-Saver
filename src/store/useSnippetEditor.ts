@@ -1,6 +1,5 @@
 import { create } from "zustand";
 
-
 type SnippetEditorStore = {
   open: boolean;
   handleOpenEditor: () => void;

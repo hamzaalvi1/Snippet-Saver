@@ -1,9 +1,11 @@
 "use client";
 
+import { Controller } from "react-hook-form";
+
 import { HiOutlineCode } from "react-icons/hi";
 import { IoMdCloseCircle } from "react-icons/io";
 import { PiTagChevronFill } from "react-icons/pi";
-import { Typography, Box, Stack } from "@mui/material";
+import { Typography, Box, Stack, FormHelperText } from "@mui/material";
 import { StyledDrawer } from "../Sidebar/Sidebar.style";
 import { StyledAddCodeSnippetWrapper } from "./CodeSnippet.style";
 
@@ -13,16 +15,21 @@ import { AutoCompleteOptionType } from "../AutoComplete/AutoComplete";
 import { InputField, AutoComplete, Button, CodeEditor } from "@/components";
 
 import { ProgrammingLanguages, EditorThemes } from "@/constants";
-import { pxToEM, theme } from "@/theme";
+import { pxToEM, theme as MuiTheme } from "@/theme";
 
 import { useAddSnippetContainer } from "./useAddSnippetContainer";
 
 const AddSnippet = () => {
   const {
-    tags,
+    theme,
+    language,
     editorOpen,
+    snippetControl,
     handleAddTags,
-    handleCloseEditor,
+    handleSubmit,
+    handleSelectTheme,
+    handleSubmitSnippet,
+    handleCloseSnippetEditor,
     handleFormatedEditorOptions,
   } = useAddSnippetContainer();
 
@@ -32,17 +39,17 @@ const AddSnippet = () => {
       anchor="right"
       open={editorOpen}
       drawerWidth={500}
-      onClose={handleCloseEditor}
+      onClose={handleCloseSnippetEditor}
     >
       <StyledAddCodeSnippetWrapper>
         <Stack direction={"row"} gap={10} alignItems={"center"}>
           <Box
             sx={{ cursor: "pointer", userSelect: "none" }}
-            onClick={handleCloseEditor}
+            onClick={handleCloseSnippetEditor}
           >
             <IoMdCloseCircle
               fontSize={35}
-              color={theme.palette.text.secondary}
+              color={MuiTheme.palette.text.secondary}
             />
           </Box>
           <Typography variant="h3" color={"primary.main"}>
@@ -50,30 +57,42 @@ const AddSnippet = () => {
           </Typography>
         </Stack>
         <Box sx={{ marginBlock: pxToEM(10) }}>
-          <form>
+          <form onSubmit={handleSubmit(handleSubmitSnippet)}>
             <Stack gap={pxToEM(15)}>
               <InputField
                 id="title"
                 name="title"
                 label="Title"
                 showIcon={true}
+                control={snippetControl}
                 leftIcon={<MdOutlineTitle />}
                 sxIconProps={{ fontSize: 18 }}
                 placeholder="Add code title"
               />
-              <AutoComplete
-                id="tags"
-                label="Tags"
-                showIcon={true}
-                multiple={true}
-                leftIcon={<PiTagChevronFill />}
-                sxIconProps={{ fontSize: 18 }}
-                placeholder="Add code tags"
-                value={tags}
-                onChange={(value) =>
-                  handleAddTags(value as AutoCompleteOptionType[])
-                }
-                options={[]}
+              <Controller
+                name="tags"
+                control={snippetControl}
+                render={({ field, fieldState: { error } }) => (
+                  <AutoComplete
+                    {...field}
+                    id="tags"
+                    label="Tags"
+                    showIcon={true}
+                    multiple={true}
+                    leftIcon={<PiTagChevronFill />}
+                    sxIconProps={{ fontSize: 18 }}
+                    placeholder="Add code tags"
+                    value={field.value}
+                    error={error?.message}
+                    onChange={(value) =>
+                      handleAddTags(
+                        value as AutoCompleteOptionType[],
+                        field.onChange
+                      )
+                    }
+                    options={[]}
+                  />
+                )}
               />
               <InputField
                 rows={Infinity}
@@ -82,6 +101,7 @@ const AddSnippet = () => {
                 id="description"
                 name="description"
                 label="Description"
+                control={snippetControl}
                 leftIcon={<MdDescription />}
                 sxIconProps={{
                   fontSize: 20,
@@ -96,27 +116,67 @@ const AddSnippet = () => {
               <Stack gap={10} direction={"row"}>
                 <AutoComplete
                   label="Theme"
-                  options={handleFormatedEditorOptions(EditorThemes)}
-                  value={null}
-                  onChange={() => {}}
-                  placeholder="Select theme"
                   showIcon={true}
+                  value={theme}
+                  onChange={(value) =>
+                    handleSelectTheme(value as AutoCompleteOptionType)
+                  }
                   leftIcon={<MdLanguage />}
+                  placeholder="Select theme"
+                  options={handleFormatedEditorOptions(EditorThemes)}
                   sxIconProps={{ fontSize: 18 }}
                 />
-                <AutoComplete
-                  label="Language"
-                  options={handleFormatedEditorOptions(ProgrammingLanguages)}
-                  value={null}
-                  onChange={() => {}}
-                  showIcon={true}
-                  leftIcon={<HiOutlineCode />}
-                  sxIconProps={{ fontSize: 18 }}
-                  placeholder="Select language"
+                <Controller
+                  name="language"
+                  control={snippetControl}
+                  render={({ field }) => (
+                    <AutoComplete
+                      {...field}
+                      label="Language"
+                      value={field.value}
+                      onChange={(value) =>
+                        field.onChange(value as AutoCompleteOptionType)
+                      }
+                      showIcon={true}
+                      leftIcon={<HiOutlineCode />}
+                      placeholder="Select language"
+                      sxIconProps={{ fontSize: 18 }}
+                      options={handleFormatedEditorOptions(
+                        ProgrammingLanguages
+                      )}
+                    />
+                  )}
                 />
               </Stack>
-              <CodeEditor value={"null"} onChange={() => {}} />
-              <Button title="Add Code Snippet" />
+              <Controller
+                control={snippetControl}
+                name="code"
+                render={({
+                  field: { onChange, value },
+                  fieldState: { error },
+                }) => (
+                  <Box>
+                    <CodeEditor
+                      placeholder="add your code snippet"
+                      value={value}
+                      onChange={onChange}
+                      mode={language?.title}
+                      error={error?.message}
+                      theme={theme?.value as string}
+                    />
+                    {error?.message && (
+                      <FormHelperText
+                        error={!!error}
+                        sx={{ marginLeft: pxToEM(10) }}
+                      >
+                        {error.message}
+                      </FormHelperText>
+                    )}
+                  </Box>
+                )}
+              />
+
+              <Button title="Add Code Snippet" type="submit" />
             </Stack>
           </form>
         </Box>
