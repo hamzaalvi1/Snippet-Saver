@@ -12,7 +12,7 @@ export const addEditCodeSnippetSchema = z
       .min(3, "Minimum character must be 3"),
     tags: z.array(autoCompleteSchema).nonempty(),
     description: z.string({ message: "code description is required" }).min(3),
-    language: z.object({ title: z.string(), value: z.string() }).nullable(),
+    language: z.object({ title: z.string(), value: z.string() }),
     code: z.string().nonempty({message: "Must add code snippet"}),
   })
   .strict();

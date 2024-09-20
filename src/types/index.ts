@@ -23,7 +23,7 @@ export type LoginIn = z.infer<typeof loginSchema>;
 
 export type BaseModel = {
   createdAt: string;
-  updatedAt: string;
+  updatedAt?: string;
   deletedAt?: string | null;
 };
 
