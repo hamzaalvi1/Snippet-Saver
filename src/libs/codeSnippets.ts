@@ -13,7 +13,7 @@ export type NormalizeCodeSnippetType = {
 export type GetSnippets = {
   userId: mongoose.Schema.Types.ObjectId;
   title?: string;
-  tag?: string;
+  tags?: string;
 };
 
 export const createSnippets = async (codeSnippet: NormalizeCodeSnippetType) => {
@@ -24,17 +24,19 @@ export const createSnippets = async (codeSnippet: NormalizeCodeSnippetType) => {
   }
 };
 
-export const getSnippets = async (params: GetSnippets) => {
-  const { userId, tag, title } = params;
+export const getSnippets = async (
+  params: GetSnippets,
+  options?: Record<string, any>
+) => {
+  const { userId, tags, title } = params;
   try {
-    const snippets = await CodeSnippet.find({
-      userId: userId,
+    const query = {
+      userId,
       ...(title && { title: { $regex: title, $options: "i" } }),
-    });
-    const count = await CodeSnippet.countDocuments({
-      userId: userId,
-      ...(title && { title: { $regex: title, $options: "i" } }),
-    });
+      ...(tags && { tags: { $regex: tags, $options: "i" } }), // Assuming tags are an array or string
+    };
+    const snippets = await CodeSnippet.find(query, null, options);
+    const count = await CodeSnippet.countDocuments(query);
     return { data: snippets, total: count };
   } catch (error) {
     console.log(error);

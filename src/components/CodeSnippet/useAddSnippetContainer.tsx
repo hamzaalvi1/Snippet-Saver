@@ -1,11 +1,13 @@
 import { useState } from "react";
 
 import { useSnippertEditorStore } from "@/store";
+import { useAddCodeSnippetQuery } from "@/queries/code-snippet.queries";
 
 import { AddEditCodeSnippet } from "@/types";
 import { AutoCompleteOptionType } from "../AutoComplete/AutoComplete";
 
 import { useForm } from "react-hook-form";
+import { successLogger } from "@/utils/toast.utils";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { addEditCodeSnippetSchema } from "@/validations";
 
@@ -38,6 +40,14 @@ export const useAddSnippetContainer = () => {
     reset();
   };
 
+  const handleOnSnippetSuccess = () => {
+    handleCloseSnippetEditor();
+    successLogger("Added Successfully");
+  };
+
+  const { mutateAsync: addCodeSnippet, isPending: isSnippetLoading } =
+    useAddCodeSnippetQuery({ onSuccess: handleOnSnippetSuccess });
+
   const handleFormatedEditorOptions = (options: string[]) => {
     return options.map((option) => ({ title: option, value: option }));
   };
@@ -59,8 +69,8 @@ export const useAddSnippetContainer = () => {
     setTheme(selectedTheme);
   };
   const { language } = getValues();
-  const handleSubmitSnippet = (data: AddEditCodeSnippet) => {
-    console.log(data);
+  const handleSubmitSnippet = async (data: AddEditCodeSnippet) => {
+    addCodeSnippet(data);
   };
 
   return {
@@ -68,6 +78,7 @@ export const useAddSnippetContainer = () => {
     language,
     editorOpen,
     snippetControl,
+    isSnippetLoading,
     getValues,
     handleSubmit,
     handleAddTags,

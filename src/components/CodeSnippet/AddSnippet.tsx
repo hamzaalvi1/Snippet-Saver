@@ -2,20 +2,21 @@
 
 import { Controller } from "react-hook-form";
 
+import { pxToEM, theme as MuiTheme } from "@/theme";
+
 import { HiOutlineCode } from "react-icons/hi";
 import { IoMdCloseCircle } from "react-icons/io";
 import { PiTagChevronFill } from "react-icons/pi";
-import { Typography, Box, Stack, FormHelperText } from "@mui/material";
 import { StyledDrawer } from "../Sidebar/Sidebar.style";
 import { StyledAddCodeSnippetWrapper } from "./CodeSnippet.style";
-
+import { Typography, Box, Stack, FormHelperText } from "@mui/material";
 import { MdOutlineTitle, MdDescription, MdLanguage } from "react-icons/md";
-
-import { AutoCompleteOptionType } from "../AutoComplete/AutoComplete";
 import { InputField, AutoComplete, Button, CodeEditor } from "@/components";
 
+
 import { ProgrammingLanguages, EditorThemes } from "@/constants";
-import { pxToEM, theme as MuiTheme } from "@/theme";
+import { AutoCompleteOptionType } from "../AutoComplete/AutoComplete";
+
 
 import { useAddSnippetContainer } from "./useAddSnippetContainer";
 
@@ -25,6 +26,8 @@ const AddSnippet = () => {
     language,
     editorOpen,
     snippetControl,
+    isSnippetLoading,
+
     handleAddTags,
     handleSubmit,
     handleSelectTheme,
@@ -176,7 +179,11 @@ const AddSnippet = () => {
                 )}
               />
 
-              <Button title="Add Code Snippet" type="submit" />
+              <Button
+                type="submit"
+                title="Add Code Snippet"
+                isLoading={isSnippetLoading}
+              />
             </Stack>
           </form>
         </Box>
