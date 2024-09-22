@@ -37,13 +37,13 @@ export class FetchAPI {
     return this;
   }
 
-  // attachToken(token?: string): this {
-  //   this.token = token || store.getState().auth.token; // Use store to get the token if none is provided
-  //   if (this.token) {
-  //     this.headers["Authorization"] = `Bearer ${this.token}`;
-  //   }
-  //   return this;
-  // }
+  attachToken(token?: string): this {
+    this.token = token as string;
+    if (this.token) {
+      this.headers["Authorization"] = `Bearer ${this.token}`;
+    }
+    return this;
+  }
 
   async send<T>(): Promise<AxiosResponse<T>> {
     const config: AxiosRequestConfig = {

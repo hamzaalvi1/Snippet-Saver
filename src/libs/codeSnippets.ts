@@ -37,7 +37,7 @@ export const getSnippets = async (
     };
     const snippets = await CodeSnippet.find(query, null, options);
     const count = await CodeSnippet.countDocuments(query);
-    return { data: snippets, total: count };
+    return { snippets: snippets, total: count };
   } catch (error) {
     console.log(error);
   }
