@@ -1,26 +1,23 @@
 import { useState } from "react";
 import { useCopyToClipboard } from "usehooks-ts";
 
-import { pxToEM, theme } from "@/theme";
 
 import { FaTrash } from "react-icons/fa6";
 import { FaClipboard, FaEdit } from "react-icons/fa";
 
 import { errorLogger, successLogger } from "@/utils/toast.utils";
+import { NormalizeCodeSnippetType } from "@/libs/codeSnippets";
 
-export const useCodeSnippetContainer = () => {
+export const useCodeSnippetContainer = ({
+  snippetData,
+}: {
+  snippetData: NormalizeCodeSnippetType & { _id: string; createdAt: string };
+}) => {
   const [_, copyFn] = useCopyToClipboard();
   const [anchorEl, setAnchorEl] = useState<HTMLElement | null>(null);
 
-  const dummyCode = `export const StyledChip = styled(Chip)
-  &.MuiChip-root {
-    border-radius: ${pxToEM(5)};
-    background-color: ${theme.palette.whiteVariants.light};
-    font-size: ${pxToEM(14)};
-  }`;
-
   const handleCopyCodeSnippet = () => {
-    copyFn(dummyCode)
+    copyFn(snippetData?.code)
       .then(() => {
         successLogger("Code copied");
       })

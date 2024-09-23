@@ -1,9 +1,11 @@
 import { ClientRender } from "@/components";
+
+import DashboardLoading from "./loading";
 import SnippetsListing from "@/features/dashboard/SnippetsListing";
 
 const Dashboard = () => {
   return (
-    <ClientRender loadingComponent={<>Loading....</>}>
+    <ClientRender loadingComponent={<DashboardLoading />}>
       <SnippetsListing />
     </ClientRender>
   );

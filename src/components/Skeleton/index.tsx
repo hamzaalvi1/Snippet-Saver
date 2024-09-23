@@ -1,3 +1,4 @@
 import AvatarSkeleton from "./AvatarSkeleton";
+import CodeSnippetSkeleton from "./CodeSnippetSkeleton";
 
-export { AvatarSkeleton };
+export { AvatarSkeleton, CodeSnippetSkeleton };

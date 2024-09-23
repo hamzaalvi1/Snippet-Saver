@@ -25,7 +25,7 @@ interface ICodeSnippetProps {
 const CodeSnippet: React.FC<ICodeSnippetProps> = (props) => {
   const { snippetData } = props;
   const { menuList, anchorEl, handleMenuOpen, handleMenuClose } =
-    useCodeSnippetContainer();
+    useCodeSnippetContainer({ snippetData });
   return (
     <>
       <Card
