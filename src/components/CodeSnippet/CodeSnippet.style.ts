@@ -21,6 +21,9 @@ export const StyledCodeSnippet = styled(SyntaxHighlighter)<{
   background-color: ${theme.palette.whiteVariants.light} !important;
   width: 100%;
   font-size: ${pxToEM(18)};
+  min-height: ${pxToEM(85)};
+  max-height: ${pxToEM(245)};
+
 `;
 
 export const StyledAddCodeSnippetWrapper = styled(Box)`

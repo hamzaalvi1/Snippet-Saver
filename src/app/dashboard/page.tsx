@@ -1,28 +1,11 @@
-import { getQueryClient } from "@/queries";
-import {
-  pokemonOptions,
-  codeSnippetOption,
-  useCodeSnippetQuery,
-} from "@/queries/code-snippet.queries";
-import { dehydrate, HydrationBoundary } from "@tanstack/react-query";
-
-import { Tags } from "@/features/dashboard";
+import { ClientRender } from "@/components";
 import SnippetsListing from "@/features/dashboard/SnippetsListing";
 
 const Dashboard = () => {
-  const queryClient = getQueryClient();
-
-
-  void queryClient.prefetchQuery(pokemonOptions);
-
-  
   return (
-    <div>
-      <HydrationBoundary state={dehydrate(queryClient)}>
-        <Tags />
-        <SnippetsListing />
-      </HydrationBoundary>
-    </div>
+    <ClientRender loadingComponent={<>Loading....</>}>
+      <SnippetsListing />
+    </ClientRender>
   );
 };
 

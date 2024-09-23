@@ -1,12 +1,9 @@
 "use client";
-import { useState } from "react";
 import { pxToEM, theme } from "@/theme";
 
-import { useCopyToClipboard } from "usehooks-ts";
-
-import { FaTrash } from "react-icons/fa6";
+import Dayjs from "dayjs";
+import { FaJs } from "react-icons/fa";
 import { Chip, Checkbox } from "@/components";
-import { FaJs, FaClipboard, FaEdit } from "react-icons/fa";
 import { docco } from "react-syntax-highlighter/dist/esm/styles/hljs";
 import { MdFavoriteBorder, MdFavorite, MdMoreVert } from "react-icons/md";
 import { StyledCodeSnippet, StyledCardtContent } from "./CodeSnippet.style";
@@ -19,46 +16,31 @@ import {
 } from "@mui/material";
 import SnippetMenu from "./SnippetMenu";
 
-import { successLogger, errorLogger } from "@/utils/toast.utils";
+import { useCodeSnippetContainer } from "./useCodeSnippetContainer";
+import { NormalizeCodeSnippetType } from "@/libs/codeSnippets";
 
-const dummyCode = `export const StyledChip = styled(Chip)
-  &.MuiChip-root {
-    border-radius: ${pxToEM(5)};
-    background-color: ${theme.palette.whiteVariants.light};
-    font-size: ${pxToEM(14)};
-  }`;
-
-const CodeSnippet: React.FC = () => {
-  const [_, copyFn] = useCopyToClipboard();
-  const [anchorEl, setAnchorEl] = useState<HTMLElement | null>(null);
-
-  const handleCopyCodeSnippet = () => {
-    copyFn(dummyCode)
-      .then(() => {
-        successLogger("Code copied");
-      })
-      .catch((err) => {
-        errorLogger("error");
-      });
-  };
-  const handleMenuClose = () => {
-    setAnchorEl(null);
-  };
-  const handleMenuOpen = (event: React.MouseEvent<HTMLElement>) =>
-    setAnchorEl(event.currentTarget);
-
-  const menuList = [
-    { title: "Copy", icon: <FaClipboard />, onClick: handleCopyCodeSnippet },
-    { title: "Edit", icon: <FaEdit />, onClick: () => {} },
-    { title: "Delete", icon: <FaTrash />, onClick: () => {} },
-  ];
+interface ICodeSnippetProps {
+  snippetData: NormalizeCodeSnippetType & { _id: string; createdAt: string };
+}
+const CodeSnippet: React.FC<ICodeSnippetProps> = (props) => {
+  const { snippetData } = props;
+  const { menuList, anchorEl, handleMenuOpen, handleMenuClose } =
+    useCodeSnippetContainer();
   return (
     <>
-      <Card elevation={0} sx={{ padding: pxToEM(20), borderRadius: 2 }}>
+      <Card
+        elevation={0}
+        sx={{
+          borderRadius: 2,
+          padding: pxToEM(20),
+          minHeight: pxToEM(350),
+          alignContent: "baseline",
+        }}
+      >
         <CardHeader
           sx={{ padding: 0 }}
-          title="Hello World"
-          subheader="September 14, 2024"
+          title={snippetData?.title}
+          subheader={Dayjs(snippetData?.createdAt).format("MMMM D, YYYY")}
           subheaderTypographyProps={{ variant: "subtitle1" }}
           titleTypographyProps={{ variant: "h3", mb: 2, component: "h3" }}
           action={
@@ -84,26 +66,22 @@ const CodeSnippet: React.FC = () => {
           }
         />
         <StyledCardtContent>
-          <Chip label="hello world" size="medium" />
-          <Chip label="hello world" size="medium" />
-          <Chip label="hello world" size="medium" />
-          <Chip label="hello world" size="medium" />
+          {snippetData?.tags?.map((tag, idx) => (
+            <Chip label={tag} size="medium" key={idx} />
+          ))}
         </StyledCardtContent>
         <StyledCardtContent>
           <Typography variant="subtitle1">
-            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Eaque ab
-            repellendus adipisci incidunt ea in voluptatum suscipit odit earum
-            magnam, quo ipsam voluptate totam est autem dolorem inventore omnis
-            officia!
+            {snippetData?.description}
           </Typography>
         </StyledCardtContent>
         <StyledCardtContent>
           <StyledCodeSnippet
-            language="javascript"
+            language={snippetData?.language}
             style={docco}
             showLineNumbers
           >
-            {dummyCode}
+            {snippetData.code.trim()}
           </StyledCodeSnippet>
         </StyledCardtContent>
         <CardActions sx={{ padding: 0, justifyContent: "flex-end" }}>

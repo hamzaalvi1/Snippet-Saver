@@ -25,10 +25,10 @@ export const addCodeSnippet = (codeSnippet: AddEditCodeSnippet) => {
     .send<AddSnippetResponseType>();
 };
 
-export const getCodeSnippets = async () => {
+export const getCodeSnippets = async (params: SnippetParamsType) => {
   const token = await handleGetCookie();
   return new FetchAPI(routes.GET_SNIPPETS, "GET")
-    // .setQueryParams(params)
+    .setQueryParams(params)
     .attachToken(token)
     .send<GetSnippetsResponseType>();
 };

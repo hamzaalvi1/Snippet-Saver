@@ -7,5 +7,7 @@ export type AddSnippetResponseType = {
 export type GetSnippetsResponseType = {
   total: number;
   message: string;
-  snippets: Array<NormalizeCodeSnippetType & { _id: string }>;
+  snippets: Array<
+    NormalizeCodeSnippetType & { _id: string; createdAt: string }
+  >;
 };

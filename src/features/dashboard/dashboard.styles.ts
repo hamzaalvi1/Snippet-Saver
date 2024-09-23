@@ -15,8 +15,8 @@ export const StyledDashboardContentWrapper = styled(Box)<{ width: number }>`
   max-width: calc(100% - ${(props) => props.width}px);
   padding: ${setPadding(20)};
   margin-left: auto;
-  height: 100%;
-  max-height: calc(100% - 70px);
+  height: calc(100% - 70px);
+  overflow-y: auto;
   transition: all 0.5s ease;
 
   @media (max-width: ${theme.breakpoints.values.md}px) {

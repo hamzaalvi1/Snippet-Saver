@@ -1,5 +1,6 @@
 "use client";
 
+import { Tags } from "@/features/dashboard";
 import { Appbar, Sidebar, AddSnippet } from "@/components";
 import {
   StyledDashboardContainer,
@@ -9,6 +10,7 @@ import {
 import { DrawerWidth } from "@/constants";
 
 import { useMeQuery } from "@/queries/user.queries";
+
 import { useUserStore, useSidebarStore } from "@/store";
 
 interface IDashboardProps {
@@ -27,6 +29,9 @@ const DashboardWrapper: React.FC<IDashboardProps> = (props) => {
       <StyledDashboardContentWrapper
         width={open ? DrawerWidth.DEFAULT : DrawerWidth.MIN}
       >
+        <div>
+          <Tags />
+        </div>
         {children}
         <AddSnippet />
       </StyledDashboardContentWrapper>

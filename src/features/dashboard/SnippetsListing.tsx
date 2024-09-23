@@ -3,20 +3,19 @@
 import { Grid } from "@mui/material";
 import { CodeSnippet } from "@/components";
 
-import { useCodeSnippetQuery } from "@/queries/code-snippet.queries";
-
+import { useDashboardContainer } from "./useDashboardContainer";
 const SnippetsListing = () => {
-  const { data } = useCodeSnippetQuery();
-  console.log(data)
+  const { snippetsData, isSnippetsLoading } = useDashboardContainer();
+  console.log(snippetsData, "snippetsData");
   return (
     <Grid container spacing={10} mt={10} component={"section"}>
-      {/* {data.snippets.map((snippet) => {
+      {snippetsData?.snippets?.map((snippet) => {
         return (
           <Grid item xl={4} sm={12} md={12} lg={6} xs={12} key={snippet._id}>
-            <CodeSnippet />;
+            <CodeSnippet snippetData={snippet} />
           </Grid>
         );
-      })} */}
+      })}
     </Grid>
   );
 };
