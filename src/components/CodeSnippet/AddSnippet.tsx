@@ -26,6 +26,7 @@ const AddSnippet = () => {
     language,
     editorOpen,
     snippetControl,
+    sanitizedTagList,
     isSnippetLoading,
 
     handleAddTags,

@@ -1,5 +1,4 @@
 import { mongodbConnect, verifyToken, findUser, getTagsByUser } from "@/libs";
-import { count } from "console";
 import { type NextRequest, NextResponse } from "next/server";
 
 export const GET = async (request: NextRequest) => {
@@ -18,8 +17,10 @@ export const GET = async (request: NextRequest) => {
       exclude: "-password -__v",
     });
     const tagData = await getTagsByUser({ _id: user?._id });
-
-    const sanitizedTagList = tagData?.tags?.map((tag) => tag?.name);
+    const sanitizedTagList = tagData?.tags?.map((tag) => ({
+      tag: tag?.name,
+      id: tag?._id,
+    }));
     return NextResponse.json(
       { message: "Success!", tags: sanitizedTagList, count: tagData?.count },
       { status: 200 }

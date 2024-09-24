@@ -1,6 +1,8 @@
 import { useState } from "react";
 
 import { useSnippertEditorStore } from "@/store";
+
+import { useFetchGetAllTagQuery } from "@/queries/tags.queries";
 import { useAddCodeSnippetQuery } from "@/queries/code-snippet.queries";
 
 import { AddEditCodeSnippet } from "@/types";
@@ -48,6 +50,13 @@ export const useAddSnippetContainer = () => {
   const { mutateAsync: addCodeSnippet, isPending: isSnippetLoading } =
     useAddCodeSnippetQuery({ onSuccess: handleOnSnippetSuccess });
 
+  const { data: tagsData } = useFetchGetAllTagQuery({});
+
+  const sanitizedTagList = tagsData?.tags?.map((tag) => ({
+    title: tag?.tag,
+    value: tag?.id,
+  }));
+
   const handleFormatedEditorOptions = (options: string[]) => {
     return options.map((option) => ({ title: option, value: option }));
   };
@@ -78,6 +87,7 @@ export const useAddSnippetContainer = () => {
     language,
     editorOpen,
     snippetControl,
+    sanitizedTagList,
     isSnippetLoading,
     getValues,
     handleSubmit,

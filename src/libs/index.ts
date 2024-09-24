@@ -1,9 +1,9 @@
 import mongodbConnect from "./connect";
 
 import { generateToken, verifyToken } from "./jwt";
-import { createSnippets, getSnippets } from "./codeSnippets";
 import { createTagsByUser, getTagsByUser } from "./snippetTags";
 import { createUser, isUserAlreadyExist, findUser } from "./users";
+import { createSnippets, getSnippets, isFavoriteSnippet } from "./codeSnippets";
 
 export {
   findUser,
@@ -15,5 +15,6 @@ export {
   createSnippets,
   mongodbConnect,
   createTagsByUser,
+  isFavoriteSnippet,
   isUserAlreadyExist,
 };

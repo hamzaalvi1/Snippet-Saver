@@ -16,6 +16,10 @@ export type GetSnippets = {
   tags?: string;
 };
 
+export type IsFavoriteSnippetType = {
+  snippetId: string;
+  isFavorite: boolean;
+};
 
 export const createSnippets = async (codeSnippet: NormalizeCodeSnippetType) => {
   try {
@@ -41,6 +45,20 @@ export const getSnippets = async (
     });
     const count = await CodeSnippet.countDocuments(query);
     return { snippets: snippets, total: count };
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const isFavoriteSnippet = async (params: IsFavoriteSnippetType) => {
+  try {
+    const { snippetId, isFavorite } = params;
+    const snippet = await CodeSnippet.findByIdAndUpdate(
+      snippetId,
+      { isFavorite: isFavorite },
+      { new: true }
+    );
+    return snippet;
   } catch (error) {
     console.log(error);
   }
