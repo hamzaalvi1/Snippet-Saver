@@ -5,7 +5,13 @@ import { AddEditCodeSnippet } from "@/types";
 import { zodError } from "@/utils/error.utils";
 import { addEditCodeSnippetSchema } from "@/validations";
 
-import { verifyToken, mongodbConnect, findUser, createSnippets } from "@/libs";
+import {
+  createTags,
+  verifyToken,
+  mongodbConnect,
+  findUser,
+  createSnippets,
+} from "@/libs";
 
 export const POST = async (request: NextRequest) => {
   try {
@@ -46,9 +52,13 @@ export const POST = async (request: NextRequest) => {
       code: result?.data?.code,
       userId: user?._id,
     };
-    // check request body data end
 
+    // check request body data end
+    for (let tag of result.data.tags) {
+      await createTags(tag?.title);
+    }
     await createSnippets(normalizedData);
+
     return NextResponse.json({ message: "created" }, { status: 201 });
   } catch (error) {
     return NextResponse.json(
