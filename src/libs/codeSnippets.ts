@@ -16,6 +16,7 @@ export type GetSnippets = {
   tags?: string;
 };
 
+
 export const createSnippets = async (codeSnippet: NormalizeCodeSnippetType) => {
   try {
     await CodeSnippet.create({ ...codeSnippet });

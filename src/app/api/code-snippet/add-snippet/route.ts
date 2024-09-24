@@ -6,11 +6,11 @@ import { zodError } from "@/utils/error.utils";
 import { addEditCodeSnippetSchema } from "@/validations";
 
 import {
-  createTags,
+  findUser,
   verifyToken,
   mongodbConnect,
-  findUser,
   createSnippets,
+  createTagsByUser,
 } from "@/libs";
 
 export const POST = async (request: NextRequest) => {
@@ -52,9 +52,8 @@ export const POST = async (request: NextRequest) => {
       userId: user?._id,
     };
 
-    // check request body data end
     for (let tag of result.data.tags) {
-      await createTags(tag?.title);
+      await createTagsByUser({ tag: tag.title, userId: user?._id });
     }
     await createSnippets(normalizedData);
 
