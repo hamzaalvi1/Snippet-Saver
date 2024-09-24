@@ -35,7 +35,9 @@ export const getSnippets = async (
       ...(title && { title: { $regex: title, $options: "i" } }),
       ...(tags && { tags: { $regex: tags, $options: "i" } }), // Assuming tags are an array or string
     };
-    const snippets = await CodeSnippet.find(query, null, options);
+    const snippets = await CodeSnippet.find(query, null, options).sort({
+      createdAt: -1,
+    });
     const count = await CodeSnippet.countDocuments(query);
     return { snippets: snippets, total: count };
   } catch (error) {

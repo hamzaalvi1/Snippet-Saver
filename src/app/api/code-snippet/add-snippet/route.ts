@@ -36,7 +36,6 @@ export const POST = async (request: NextRequest) => {
 
     // check request body data start
     const data: Promise<AddEditCodeSnippet> = await request.json();
-    console.log(data);
     const result = await addEditCodeSnippetSchema.safeParseAsync(data);
     if (!result.success) {
       return NextResponse.json(
