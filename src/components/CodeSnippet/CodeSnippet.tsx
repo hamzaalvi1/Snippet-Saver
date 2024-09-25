@@ -24,8 +24,13 @@ interface ICodeSnippetProps {
 }
 const CodeSnippet: React.FC<ICodeSnippetProps> = (props) => {
   const { snippetData } = props;
-  const { menuList, anchorEl, handleMenuOpen, handleMenuClose } =
-    useCodeSnippetContainer({ snippetData });
+  const {
+    menuList,
+    anchorEl,
+    handleMenuOpen,
+    handleMenuClose,
+    handleAddRemoveFavoriteSnippet,
+  } = useCodeSnippetContainer({ snippetData });
   return (
     <>
       <Card
@@ -46,8 +51,10 @@ const CodeSnippet: React.FC<ICodeSnippetProps> = (props) => {
           action={
             <>
               <Checkbox
-                checked={true}
-                handleChange={() => {}}
+                checked={snippetData?.isFavorite || false}
+                handleChange={(evt) => {
+                  handleAddRemoveFavoriteSnippet(evt);
+                }}
                 icon={
                   <MdFavoriteBorder
                     fontSize={22}

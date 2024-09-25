@@ -5,9 +5,14 @@ import {
   addCodeSnippet,
   getCodeSnippets,
   SnippetParamsType,
+  addRemoveFavoriteSnippet,
 } from "@/helper/api/snippets";
 
 type UseAddCodeSnippetQueryType = {
+  onSuccess?: (data: any) => void | undefined;
+};
+
+type UseChangeSnippetFavoriteStatusType = {
   onSuccess?: (data: any) => void | undefined;
 };
 
@@ -48,6 +53,22 @@ export const useFetchCodeSnippetQuery = (params: UseCodeSnippetOptionType) => {
         onSuccess(data);
       }
       return data;
+    },
+  });
+};
+
+export const useChangeSnippetFavoriteStatus = (
+  params: UseChangeSnippetFavoriteStatusType
+) => {
+  const { onSuccess } = params;
+
+  return useMutation({
+    mutationFn: addRemoveFavoriteSnippet,
+    onSuccess: (data) => {
+      if (typeof onSuccess === "function" && !!data) {
+        onSuccess(data);
+      }
+      getQueryClient().invalidateQueries({ queryKey: ["code-snippets"] });
     },
   });
 };

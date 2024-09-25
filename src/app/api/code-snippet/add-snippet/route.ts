@@ -4,10 +4,12 @@ import { AddEditCodeSnippet } from "@/types";
 
 import { zodError } from "@/utils/error.utils";
 import { addEditCodeSnippetSchema } from "@/validations";
+import { removeArraysDuplicatesValues } from "@/utils/common.utils";
 
 import {
   findUser,
   verifyToken,
+  getTagsByUser,
   mongodbConnect,
   createSnippets,
   createTagsByUser,
@@ -26,7 +28,7 @@ export const POST = async (request: NextRequest) => {
     // check token end
 
     // verify token start
-    mongodbConnect();
+    await mongodbConnect();
     const tokenData = await verifyToken(token);
     const user = await findUser({
       email: tokenData?.emailAddress,
@@ -51,10 +53,18 @@ export const POST = async (request: NextRequest) => {
       code: result?.data?.code,
       userId: user?._id,
     };
-
-    for (let tag of result.data.tags) {
-      await createTagsByUser({ tag: tag.title, userId: user?._id });
+    const tagData = await getTagsByUser({ _id: normalizedData?.userId });
+    const tagList = tagData?.tags?.map((tag) => tag?.name);
+    const normalizeTagArray = removeArraysDuplicatesValues(
+      normalizedData?.tags,
+      tagList as Array<string>
+    );
+    if (!!normalizeTagArray.length) {
+      for (let tag of normalizeTagArray) {
+        await createTagsByUser({ tag: tag as string, userId: user?._id });
+      }
     }
+
     await createSnippets(normalizedData);
 
     return NextResponse.json({ message: "created" }, { status: 201 });

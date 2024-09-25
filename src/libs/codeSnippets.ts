@@ -7,6 +7,7 @@ export type NormalizeCodeSnippetType = {
   tags: string[];
   language: string;
   description: string;
+  isFavorite?: boolean;
   userId: mongoose.Schema.Types.ObjectId;
 };
 

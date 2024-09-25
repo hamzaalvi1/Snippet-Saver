@@ -7,6 +7,7 @@ import { AddEditCodeSnippet } from "@/types";
 import {
   AddSnippetResponseType,
   GetSnippetsResponseType,
+  AddEditFavoriteResponseType,
 } from "./responseType";
 
 export type SnippetParamsType = {
@@ -14,9 +15,15 @@ export type SnippetParamsType = {
   tags?: string;
 };
 
+export type AddEditFavoriteType = {
+  isFavorite: boolean;
+  snippetId: string;
+};
+
 const routes = {
   ADD_SNIPPET: `${MODULE_PREFIX}/add-snippet`,
   GET_SNIPPETS: `${MODULE_PREFIX}/snippets`,
+  ADD_REMOVE_FAVORITE: `${MODULE_PREFIX}/favorite`,
 };
 
 export const addCodeSnippet = (codeSnippet: AddEditCodeSnippet) => {
@@ -31,4 +38,12 @@ export const getCodeSnippets = async (params: SnippetParamsType) => {
     .setQueryParams(params)
     .attachToken(token)
     .send<GetSnippetsResponseType>();
+};
+
+export const addRemoveFavoriteSnippet = (params: AddEditFavoriteType) => {
+  const { snippetId, isFavorite } = params;
+  return new FetchAPI(routes.ADD_REMOVE_FAVORITE, "PATCH")
+    .setQueryParams({ snippetId: snippetId })
+    .setData({ isFavorite: isFavorite })
+    .send<AddEditFavoriteResponseType>();
 };

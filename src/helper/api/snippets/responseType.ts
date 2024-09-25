@@ -3,6 +3,9 @@ import { NormalizeCodeSnippetType } from "@/libs/codeSnippets";
 export type AddSnippetResponseType = {
   message: string;
 };
+export type AddEditFavoriteResponseType = {
+  message: string;
+};
 
 export type GetSnippetsResponseType = {
   total: number;

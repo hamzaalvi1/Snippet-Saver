@@ -10,6 +10,7 @@ import {
   SxProps,
   createFilterOptions,
   FormHelperText,
+  ListItemText,
 } from "@mui/material";
 import { pxToEM } from "@/theme";
 
@@ -73,12 +74,17 @@ const AutoComplete = forwardRef<HTMLElement, IAutoCompleteProps>(
           isOptionEqualToValue={(option: any, value: any) =>
             option.value === value.value
           }
+         
           renderTags={(value: unknown[], getTagProps) =>
             (value as AutoCompleteOptionType[]).map(
               (option: AutoCompleteOptionType, index: number) => {
                 const { key, ...tagProps } = getTagProps({ index });
                 return (
-                  <StyledChip label={option.title} key={key} {...tagProps} />
+                  <StyledChip
+                    label={option.title}
+                    key={`${option.value}-${key}`}
+                    {...tagProps}
+                  />
                 );
               }
             )

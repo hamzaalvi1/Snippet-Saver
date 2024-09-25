@@ -13,10 +13,8 @@ import { Typography, Box, Stack, FormHelperText } from "@mui/material";
 import { MdOutlineTitle, MdDescription, MdLanguage } from "react-icons/md";
 import { InputField, AutoComplete, Button, CodeEditor } from "@/components";
 
-
 import { ProgrammingLanguages, EditorThemes } from "@/constants";
 import { AutoCompleteOptionType } from "../AutoComplete/AutoComplete";
-
 
 import { useAddSnippetContainer } from "./useAddSnippetContainer";
 
@@ -94,7 +92,7 @@ const AddSnippet = () => {
                         field.onChange
                       )
                     }
-                    options={[]}
+                    options={sanitizedTagList as AutoCompleteOptionType[]}
                   />
                 )}
               />

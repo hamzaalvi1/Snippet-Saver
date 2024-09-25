@@ -1,13 +1,12 @@
 import { useState } from "react";
 import { useCopyToClipboard } from "usehooks-ts";
 
-
 import { FaTrash } from "react-icons/fa6";
 import { FaClipboard, FaEdit } from "react-icons/fa";
 
 import { errorLogger, successLogger } from "@/utils/toast.utils";
 import { NormalizeCodeSnippetType } from "@/libs/codeSnippets";
-
+import { useChangeSnippetFavoriteStatus } from "@/queries/code-snippet.queries";
 export const useCodeSnippetContainer = ({
   snippetData,
 }: {
@@ -32,6 +31,22 @@ export const useCodeSnippetContainer = ({
   const handleMenuOpen = (event: React.MouseEvent<HTMLElement>) =>
     setAnchorEl(event.currentTarget);
 
+  const handleSuccess = () => {
+    successLogger("success", {
+      position: "top-center",
+    });
+  };
+  const { mutateAsync: changeSnippetFavorites } =
+    useChangeSnippetFavoriteStatus({ onSuccess: handleSuccess });
+
+  const handleAddRemoveFavoriteSnippet = async (
+    evt: React.ChangeEvent<HTMLInputElement>
+  ) => {
+    await changeSnippetFavorites({
+      snippetId: snippetData?._id,
+      isFavorite: !snippetData?.isFavorite,
+    });
+  };
   const menuList = [
     { title: "Copy", icon: <FaClipboard />, onClick: handleCopyCodeSnippet },
     { title: "Edit", icon: <FaEdit />, onClick: () => {} },
@@ -43,5 +58,6 @@ export const useCodeSnippetContainer = ({
     anchorEl,
     handleMenuOpen,
     handleMenuClose,
+    handleAddRemoveFavoriteSnippet,
   };
 };
