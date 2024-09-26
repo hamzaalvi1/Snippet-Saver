@@ -1,5 +1,4 @@
 "use client";
-import { useState, useCallback } from "react";
 
 import { useSidebarStore } from "@/store";
 
@@ -11,13 +10,6 @@ import { StyledAppBar, StyledIconButton, StyledToolbar } from "./Appbar.style";
 
 const Appbar: React.FC<{}> = () => {
   const { open, toggleOpen } = useSidebarStore();
-  const [searchQuery, setSearchQuery] = useState<string>("");
-
-  const handleSearch = useCallback(
-    (evt: React.ChangeEvent<HTMLInputElement>) =>
-      setSearchQuery(evt.target.value),
-    [setSearchQuery]
-  );
 
   return (
     <StyledAppBar
@@ -34,7 +26,7 @@ const Appbar: React.FC<{}> = () => {
         >
           <HiMenuAlt1 size={24} strokeWidth={0.5} />
         </StyledIconButton>
-        <Searchbox value={searchQuery} handleChange={handleSearch} />
+        <Searchbox />
         <ClientRender loadingComponent={<Skeleton.AvatarSkeleton />}>
           <Avatar />
         </ClientRender>

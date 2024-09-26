@@ -4,12 +4,13 @@ import { mongodbConnect, verifyToken, getSnippets, findUser } from "@/libs";
 
 export const GET = async (request: NextRequest) => {
   try {
-    const token = request.headers
-      .get("Authorization")!
-      ?.split("Bearer")?.[1]
-      ?.trim();
-    const title = request.nextUrl.searchParams.get("title") as string;
-    const tags = request.nextUrl.searchParams.get("tags") as string;
+    const token = request.cookies.get("accessToken")?.value!;
+    const search = request.nextUrl.searchParams.get("search") as string;
+    const isFavoriteQueryParams = request.nextUrl.searchParams.get(
+      "isFavorite"
+    ) as string;
+
+    const isFavorite = isFavoriteQueryParams === "true" && true;
 
     if (!token) {
       return NextResponse.json(
@@ -24,8 +25,8 @@ export const GET = async (request: NextRequest) => {
 
     const snippets = await getSnippets({
       userId: user._id,
-      title: title,
-      tags,
+      search: search,
+      isFavorite: isFavorite,
     });
 
     return NextResponse.json(

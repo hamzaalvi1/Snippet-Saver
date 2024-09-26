@@ -1,7 +1,6 @@
 const MODULE_PREFIX = "code-snippet";
 
 import { FetchAPI } from "@/utils/fetch.utils";
-import { handleGetCookie } from "@/utils/cookies.utils";
 
 import { AddEditCodeSnippet } from "@/types";
 import {
@@ -13,6 +12,7 @@ import {
 export type SnippetParamsType = {
   title?: string;
   tags?: string;
+  search?: string;
 };
 
 export type AddEditFavoriteType = {
@@ -33,10 +33,8 @@ export const addCodeSnippet = (codeSnippet: AddEditCodeSnippet) => {
 };
 
 export const getCodeSnippets = async (params: SnippetParamsType) => {
-  const token = await handleGetCookie();
   return new FetchAPI(routes.GET_SNIPPETS, "GET")
     .setQueryParams(params)
-    .attachToken(token)
     .send<GetSnippetsResponseType>();
 };
 

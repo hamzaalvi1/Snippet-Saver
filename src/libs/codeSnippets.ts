@@ -13,8 +13,8 @@ export type NormalizeCodeSnippetType = {
 
 export type GetSnippets = {
   userId: mongoose.Schema.Types.ObjectId;
-  title?: string;
-  tags?: string;
+  search?: string;
+  isFavorite?: boolean;
 };
 
 export type IsFavoriteSnippetType = {
@@ -34,13 +34,21 @@ export const getSnippets = async (
   params: GetSnippets,
   options?: Record<string, any>
 ) => {
-  const { userId, tags, title } = params;
+  const { userId, search, isFavorite } = params;
   try {
-    const query = {
+    const query: any = {
       userId,
-      ...(title && { title: { $regex: title, $options: "i" } }),
-      ...(tags && { tags: { $regex: tags, $options: "i" } }), // Assuming tags are an array or string
     };
+    if (!!search) {
+      query.$or = [
+        { title: { $regex: search, $options: "i" } }, // Search in title
+        { description: { $regex: search, $options: "i" } }, // Search in description
+        { tags: { $regex: search, $options: "i" } }, // Search in tags array
+      ];
+    }
+    if (isFavorite) {
+      query.isFavorite = true;
+    }
     const snippets = await CodeSnippet.find(query, null, options).sort({
       createdAt: -1,
     });
