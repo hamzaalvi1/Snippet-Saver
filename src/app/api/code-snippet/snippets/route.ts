@@ -9,7 +9,7 @@ export const GET = async (request: NextRequest) => {
     const isFavoriteQueryParams = request.nextUrl.searchParams.get(
       "isFavorite"
     ) as string;
-
+    const tags = request?.nextUrl?.searchParams.get("tags") as string;
     const isFavorite = isFavoriteQueryParams === "true" && true;
 
     if (!token) {
@@ -24,6 +24,7 @@ export const GET = async (request: NextRequest) => {
     const user = await findUser({ email: data?.emailAddress });
 
     const snippets = await getSnippets({
+      tags: tags,
       userId: user._id,
       search: search,
       isFavorite: isFavorite,

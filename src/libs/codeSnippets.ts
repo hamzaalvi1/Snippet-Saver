@@ -15,6 +15,7 @@ export type GetSnippets = {
   userId: mongoose.Schema.Types.ObjectId;
   search?: string;
   isFavorite?: boolean;
+  tags?: string;
 };
 
 export type IsFavoriteSnippetType = {
@@ -34,7 +35,8 @@ export const getSnippets = async (
   params: GetSnippets,
   options?: Record<string, any>
 ) => {
-  const { userId, search, isFavorite } = params;
+  const { userId, search, isFavorite, tags } = params;
+  console.log(tags, "tag hello world");
   try {
     const query: any = {
       userId,
@@ -48,6 +50,10 @@ export const getSnippets = async (
     }
     if (isFavorite) {
       query.isFavorite = true;
+    }
+
+    if (tags) {
+      query.tags = tags;
     }
     const snippets = await CodeSnippet.find(query, null, options).sort({
       createdAt: -1,

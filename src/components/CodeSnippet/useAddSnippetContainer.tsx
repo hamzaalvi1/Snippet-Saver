@@ -2,7 +2,8 @@ import { useState } from "react";
 
 import { useSnippertEditorStore } from "@/store";
 
-import { useFetchGetAllTagQuery } from "@/queries/tags.queries";
+// import { useFetchGetAllTagQuery } from "@/queries/tags.queries";
+import { getQueryClient } from "@/queries";
 import { useAddCodeSnippetQuery } from "@/queries/code-snippet.queries";
 
 import { AddEditCodeSnippet } from "@/types";
@@ -12,6 +13,7 @@ import { useForm } from "react-hook-form";
 import { successLogger } from "@/utils/toast.utils";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { addEditCodeSnippetSchema } from "@/validations";
+import { GetTagResponseType } from "@/helper/api/tags/responseType";
 
 export const useAddSnippetContainer = () => {
   const [theme, setTheme] = useState<AutoCompleteOptionType | null>({
@@ -50,7 +52,9 @@ export const useAddSnippetContainer = () => {
   const { mutateAsync: addCodeSnippet, isPending: isSnippetLoading } =
     useAddCodeSnippetQuery({ onSuccess: handleOnSnippetSuccess });
 
-  const { data: tagsData } = useFetchGetAllTagQuery({});
+  const tagsData = getQueryClient().getQueryData([
+    "tags",
+  ]) as GetTagResponseType;
 
   const sanitizedTagList = tagsData?.tags?.map((tag) => ({
     title: tag?.tag,

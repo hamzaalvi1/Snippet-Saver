@@ -31,7 +31,12 @@ export const useAddCodeSnippetQuery = (params: UseAddCodeSnippetQueryType) => {
       if (typeof onSuccess === "function" && !!data) {
         onSuccess(data);
       }
-      getQueryClient().invalidateQueries({ queryKey: ["code-snippets"] });
+      getQueryClient().invalidateQueries({
+        queryKey: ["code-snippets"],
+      });
+      getQueryClient().invalidateQueries({
+        queryKey: ["tags"],
+      });
     },
   });
 };
