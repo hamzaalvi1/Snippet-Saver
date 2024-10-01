@@ -9,7 +9,7 @@ export const useDashboardContainer = () => {
   const { searchValue } = useSearchQueryStore((state) => state);
   const { data: snippetsData, isLoading: isSnippetsLoading } =
     useFetchCodeSnippetQuery({
-      queryKeys: [searchValue, isFavoriteChecked.toString()],
+      queryKeys: [searchValue && searchValue, isFavoriteChecked.toString()],
       queryParams: {
         ...(searchValue && { search: searchValue }),
         ...(isFavoriteChecked && { isFavorite: true }),
